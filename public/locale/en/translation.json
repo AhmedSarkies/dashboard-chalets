@@ -1,0 +1,287 @@
+{
+  "headerLogout": "Logout",
+  "titleDeleteAlert": "Are you sure to delete ",
+  "textDeleteAlert": "You will not be able to undo this action!",
+  "confirmButtonText": "Yes, delete it!",
+  "titleDeletedSuccess": "Deleted",
+  "textDeletedSuccess": "successfully",
+  "doneDeletedSuccess": "OK",
+  "noChange": "No Changes",
+  "emailExisted": "Email Already Existed",
+  "phoneExisted": "Phone Already Existed",
+  "cancel": "Cancel",
+  "add": "Add",
+  "edit": "Edit",
+  "save": "Save",
+  "delete": "Delete",
+  "update": "Update",
+  "visits": "Visits",
+  "choosechalet": "Choose chalet",
+  "chooseBook": "Choose Book",
+  "chooseImageBook": "Choose Image Book",
+  "chooseAudio": "Choose Audio",
+  "chooseImageAudio": "Choose Image Audio",
+  "chalet": "chalet",
+  "action": "Actions",
+  "chooseImage": "Choose Image",
+  "status": "Status",
+  "approve": "Approve",
+  "pending": "Pending",
+  "private": "Private",
+  "public": "Public",
+  "active": "Active",
+  "inactive": "Inactive",
+  "chooseCategory": "Choose Category",
+  "columnsFilter": "Columns",
+  "search": "Search",
+  "control": "Control",
+  "noData": "No Data",
+  "noColumns": "No Columns",
+  "networkError": "Network Error",
+  "serverError": "Server Error",
+  "someError": "Some Error",
+  "auth": {
+    "login": {
+      "title": "Login to Chalets",
+      "email": "email",
+      "password": "password",
+      "submit": "Login",
+      "forgetPassword": "Forgot Password?"
+    },
+    "forgetPassword": {
+      "title": "Enter your email to reset your password",
+      "email": "email",
+      "submit": "Send"
+    }
+  },
+  "dashboard": {
+    "users": "Users",
+    "chalets": "Chalets",
+    "brokers": "Brokers",
+    "bookChalets": "Book Chalets"
+  },
+  "linkItems": {
+    "home": "Home",
+    "subAdmins": "Sub Admins",
+    "settings": "Settings",
+    "settingsApp": "App Settings",
+    "slider": "Slider",
+    "termsAndConditions": "Terms And Conditions",
+    "messages": "Messages",
+    "chalets": "Chalets",
+    "users": "Users",
+    "brokers": "Brokers",
+    "bookChalets": "Book Chalets"
+  },
+  "profile": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "changePassword": "Change Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "subAdmin": {
+    "title": "Sub Admins",
+    "addTitle": "Add Sub Admin",
+    "editTitle": "Edit Sub Admin",
+    "columns": {
+      "image": "Image",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone"
+    }
+  },
+  "message": {
+    "columns": {
+      "name": "Name",
+      "content": "Message",
+      "email": "Email",
+      "phone": "Phone",
+      "read": "Read"
+    }
+  },
+  "settings": {
+    "settingsApp": {
+      "logo": "Logo",
+      "prayer": {
+        "time": "Prayer Time",
+        "adhan": "Adhan",
+        "iqama": "Iqama"
+      },
+      "codeContent": {
+        "title": "Code Content",
+        "addTitle": "Add Code Content",
+        "editTitle": "Edit Code Content",
+        "columns": {
+          "code": "Code",
+          "content": "Content",
+          "email": "Email"
+        }
+      }
+    },
+    "slider": {
+      "addTitle": "Add Slider",
+      "editTitle": "Edit Slider",
+      "columns": {
+        "image": "Image",
+        "title": "Title",
+        "description": "Description",
+        "order": "Order"
+      }
+    },
+    "termsAndConditions": {
+      "title": "Terms And Conditions",
+      "addTitle": "Add Terms And Conditions",
+      "editTitle": "Edit Terms And Conditions",
+      "columns": {
+        "title": "Title",
+        "country": "Country",
+        "text": "Description",
+        "ar": {
+          "title": "Title (Arabic)",
+          "country": "Country (Arabic)",
+          "text": "Description (Arabic)"
+        },
+        "en": {
+          "title": "Title (English)",
+          "country": "Country (English)",
+          "text": "Description (English)"
+        }
+      }
+    },
+    "links": {
+      "contact": {
+        "title": "Contact Us",
+        "addTitle": "Add Contact",
+        "contactLinks": "Links Contact",
+        "editTitle": "Edit Contact",
+        "columns": {
+          "facebook": "Facebook",
+          "messenger": "Messenger",
+          "twitter": "Twitter",
+          "instagram": "Instagram",
+          "telegram": "Telegram",
+          "linkedin": "Linkedin",
+          "tikTok": "Tik Tok",
+          "youtube": "Youtube",
+          "whatsapp": "Whatsapp",
+          "snapchat": "Snapchat",
+          "phone": "Phone",
+          "email": "Email",
+          "address": "Address",
+          "map": "Map"
+        }
+      },
+      "appLink": {
+        "title": "App Links",
+        "addTitle": "Add App Link",
+        "editTitle": "Edit App Link",
+        "appLinks": "Links App",
+        "columns": {
+          "appStore": "App Store",
+          "playStore": "Play Store"
+        }
+      }
+    }
+  },
+  "chalets": {
+    "title": "Chalets",
+    "addTitle": "Add Chalet",
+    "editTitle": "Edit Chalet",
+    "columns": {
+      "image": "Image",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "price": "Price"
+    }
+  },
+  "brokers": {
+    "title": "Brokers",
+    "addTitle": "Add Broker",
+    "editTitle": "Edit Broker",
+    "columns": {
+      "image": "Image",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone"
+    }
+  },
+  "bookChalets": {
+    "title": "Book Chalets",
+    "bookAccept": "Book Accept",
+    "bookReject": "Book Reject",
+    "columns": {
+      "user": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone"
+      },
+      "chalet": {
+        "name": "Name of Chalet",
+        "address": "Address",
+        "price": "Price",
+        "date": "Date",
+        "time": "Time"
+      }
+    }
+  },
+  "toast": {
+    "subAdmin": {
+      "addedSuccess": "Sub Admin added successfully",
+      "addedError": "An error occurred while adding sub admin",
+      "editedSuccess": "Sub Admin edited successfully",
+      "editedError": "An error occurred while editing sub admin",
+      "deletedSuccess": "Sub Admin deleted successfully",
+      "deletedError": "An error occurred while deleting sub admin"
+    },
+    "chalets": {
+      "addedSuccess": "Chalet added successfully",
+      "addedError": "An error occurred while adding chalet",
+      "editedSuccess": "Chalet edited successfully",
+      "editedError": "An error occurred while editing chalet",
+      "deletedSuccess": "Chalet deleted successfully",
+      "deletedError": "An error occurred while deleting chalet"
+    },
+    "brokers": {
+      "addedSuccess": "Broker added successfully",
+      "addedError": "An error occurred while adding broker",
+      "editedSuccess": "Broker edited successfully",
+      "editedError": "An error occurred while editing broker",
+      "deletedSuccess": "Broker deleted successfully",
+      "deletedError": "An error occurred while deleting broker"
+    },
+    "termsAndConditions": {
+      "addedSuccess": "Terms and Conditions added successfully",
+      "addedError": "An error occurred while adding terms and conditions",
+      "editedSuccess": "Terms and Conditions edited successfully",
+      "editedError": "An error occurred while editing terms and conditions",
+      "deletedSuccess": "Terms and Conditions deleted successfully",
+      "deletedError": "An error occurred while deleting terms and conditions"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email",
+    "password": "Password must be at least 6 characters",
+    "confirmPassword": "Password and confirm password must be the same",
+    "phone": "Please enter a valid phone number 11 digits (Ex: 01234567890)",
+    "image": "Please choose an image",
+    "audio": "Please choose an audio",
+    "book": "Please choose a book",
+    "article": "Please choose an article",
+    "category": "Please choose a category",
+    "chalet": "Please choose an chalet",
+    "title": "Please enter a title",
+    "description": "Please enter a description",
+    "order": "Please enter number of order",
+    "name": "Please enter a name",
+    "content": "Please enter a content",
+    "mainCategory": "Please choose a main category",
+    "subCategory": "Please choose a sub category",
+    "url": "Please enter a valid URL"
+  }
+}

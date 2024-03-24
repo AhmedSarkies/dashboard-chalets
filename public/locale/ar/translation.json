@@ -1,0 +1,284 @@
+{
+  "headerLogout": "تسجيل الخروج",
+  "titleDeleteAlert": "هل انت متأكد من حذف ",
+  "textDeleteAlert": "لن تتمكن من التراجع عن هذا الاجراء!",
+  "confirmButtonText": "نعم, احذفه!",
+  "titleDeletedSuccess": "تم حذف",
+  "textDeletedSuccess": "بنجاح",
+  "doneDeletedSuccess": "تم",
+  "noChange": "لم يتم التغيير",
+  "emailExisted": "البريد الالكتروني موجود مسبقا",
+  "phoneExisted": "رقم الهاتف موجود مسبقا",
+  "cancel": "إلغاء",
+  "add": "إضافة",
+  "edit": "تعديل",
+  "save": "حفظ",
+  "delete": "حذف",
+  "update": "تحديث",
+  "visits": "الزيارات",
+  "chooseImage": "اختر صورة",
+  "chooseBook": "اختر الكتاب",
+  "chooseImageBook": "اختر صورة الكتاب",
+  "chooseAudio": "اختر الصوتية",
+  "chooseImageAudio": "اختر صورة الصوتية",
+  "chooseCategory": "اختر تصنيف",
+  "chalet": "شاليه",
+  "action": "الإجراءات",
+  "status": "الحالة",
+  "approve": "مفعل",
+  "pending": "قيد الانتظار",
+  "private": "خاص",
+  "public": "عام",
+  "active": "نشط",
+  "inactive": "غير نشط",
+  "columnsFilter": "الأعمدة",
+  "search": "بحث",
+  "noData": "لا توجد بيانات",
+  "noColumns": "لا توجد أعمدة",
+  "networkError": "خطأ في الشبكة",
+  "serverError": "خطأ في الخادم",
+  "someError": "حدث خطأ ما",
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول إلى شاليهات",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "forgetPassword": "هل نسيت كلمة المرور؟"
+    },
+    "forgetPassword": {
+      "title": "أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور الخاصة بك",
+      "email": "البريد الإلكتروني",
+      "submit": "إرسال"
+    }
+  },
+  "dashboard": {
+    "users": "المستخدمين",
+    "chalets": "الشاليهات",
+    "brokers": "الوسطاء",
+    "bookChalets": "حجوزات الشاليهات"
+  },
+  "linkItems": {
+    "home": "الصفحة الرئيسية",
+    "subAdmins": "المسؤولين الفرعيين",
+    "settings": "الإعدادات",
+    "settingsApp": "إعدادات التطبيق",
+    "slider": "السلايدر",
+    "termsAndConditions": "الشروط والأحكام",
+    "messages": "الرسائل",
+    "users": "المستخدمين",
+    "chalets": "الشاليهات",
+    "brokers": "الوسطاء",
+    "bookChalets": "حجوزات الشاليهات"
+  },
+  "profile": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "changePassword": "تغيير كلمة المرور",
+    "oldPassword": "كلمة المرور القديمة",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور"
+  },
+  "subAdmin": {
+    "title": "المسؤولين الفرعيين",
+    "addTitle": "إضافة مسؤول فرعي",
+    "editTitle": "تعديل مسؤول فرعي",
+    "columns": {
+      "image": "الصورة",
+      "name": "المسؤول",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف"
+    }
+  },
+  "message": {
+    "columns": {
+      "name": "الاسم",
+      "content": "الرسالة",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "read": "قراءة"
+    }
+  },
+  "settings": {
+    "settingsApp": {
+      "logo": "الشعار",
+      "prayer": {
+        "time": "أوقات الصلاة",
+        "adhan": "الأذان",
+        "iqama": "الإقامة"
+      },
+      "codeContent": {
+        "title": "رمز المحتوى",
+        "addTitle": "إضافة رمز المحتوى",
+        "editTitle": "تعديل رمز المحتوى",
+        "columns": {
+          "code": "الرمز",
+          "content": "المحتوى",
+          "email": "البريد الإلكتروني"
+        }
+      }
+    },
+    "slider": {
+      "addTitle": "إضافة سلايدر",
+      "editTitle": "تعديل سلايدر",
+      "columns": {
+        "image": "الصورة",
+        "title": "العنوان",
+        "description": "الوصف",
+        "order": "الترتيب"
+      }
+    },
+    "termsAndConditions": {
+      "title": "الشروط والأحكام",
+      "addTitle": "إضافة شرط وحكم",
+      "editTitle": "تعديل شرط وحكم",
+      "columns": {
+        "title": "العنوان",
+        "country": "الدولة",
+        "text": "الوصف",
+        "ar": {
+          "title": "العنوان (بالعربي)",
+          "country": "الدولة (بالعربي)",
+          "text": "الوصف (بالعربي)"
+        },
+        "en": {
+          "title": "العنوان (بالإنجليزية)",
+          "country": "الدولة (بالإنجليزية)",
+          "text": "الوصف (بالإنجليزية)"
+        }
+      }
+    },
+    "links": {
+      "contact": {
+        "title": "تواصل معنا",
+        "addTitle": "إضافة رابط تواصل",
+        "contactLinks": "روابط التواصل",
+        "editTitle": "تعديل رابط تواصل",
+        "columns": {
+          "facebook": "فيسبوك",
+          "messenger": "مسنجر",
+          "twitter": "تويتر",
+          "instagram": "انستجرام",
+          "telegram": "تليجرام",
+          "linkedin": "لينكد إن",
+          "tikTok": "تيك توك",
+          "youtube": "يوتيوب",
+          "whatsapp": "واتساب",
+          "snapchat": "سناب شات",
+          "phone": "الهاتف",
+          "email": "البريد الإلكتروني",
+          "address": "العنوان",
+          "map": "الخريطة"
+        }
+      },
+      "appLink": {
+        "title": "روابط التطبيق",
+        "addTitle": "إضافة رابط التطبيق",
+        "editTitle": "تعديل رابط التطبيق",
+        "columns": {
+          "appStore": "آب ستور",
+          "playStore": "بلاي ستور"
+        }
+      }
+    }
+  },
+  "chalets": {
+    "title": "الشاليهات",
+    "addTitle": "إضافة شاليه",
+    "editTitle": "تعديل شاليه",
+    "columns": {
+      "image": "الصورة",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "address": "العنوان",
+      "price": "السعر"
+    }
+  },
+  "brokers": {
+    "title": "الوسطاء",
+    "addTitle": "إضافة وسيط",
+    "editTitle": "تعديل وسيط",
+    "columns": {
+      "image": "الصورة",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف"
+    }
+  },
+  "bookChalets": {
+    "title": "حجوزات الشاليهات",
+    "bookAccept": "قبول الحجز",
+    "bookReject": "رفض الحجز",
+    "columns": {
+      "user": {
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "phone": "الهاتف"
+      },
+      "chalet": {
+        "name": "الاسم الشاليه",
+        "address": "العنوان",
+        "price": "السعر",
+        "date": "التاريخ",
+        "time": "الوقت"
+      }
+    }
+  },
+  "toast": {
+    "subAdmin": {
+      "addedSuccess": "تم إضافة المسؤول الفرعي بنجاح",
+      "addedError": "حدث خطأ أثناء إضافة المسؤول الفرعي",
+      "updatedSuccess": "تم تعديل المسؤول الفرعي بنجاح",
+      "updatedError": "حدث خطأ أثناء تعديل المسؤول الفرعي",
+      "deletedSuccess": "تم حذف المسؤول الفرعي بنجاح",
+      "deletedError": "حدث خطأ أثناء حذف المسؤول الفرعي"
+    },
+    "chalets": {
+      "addedSuccess": "تم إضافة الشاليه بنجاح",
+      "addedError": "حدث خطأ أثناء إضافة الشاليه",
+      "updatedSuccess": "تم تعديل الشاليه بنجاح",
+      "updatedError": "حدث خطأ أثناء تعديل الشاليه",
+      "deletedSuccess": "تم حذف الشاليه بنجاح",
+      "deletedError": "حدث خطأ أثناء حذف الشاليه"
+    },
+    "brookers": {
+      "addedSuccess": "تم إضافة الوسيط بنجاح",
+      "addedError": "حدث خطأ أثناء إضافة الوسيط",
+      "updatedSuccess": "تم تعديل الوسيط بنجاح",
+      "updatedError": "حدث خطأ أثناء تعديل الوسيط",
+      "deletedSuccess": "تم حذف الوسيط بنجاح",
+      "deletedError": "حدث خطأ أثناء حذف الوسيط"
+    },
+    "termsAndConditions": {
+      "addedSuccess": "تم إضافة الشروط والأحكام بنجاح",
+      "addedError": "حدث خطأ أثناء إضافة الشروط والأحكام",
+      "updatedSuccess": "تم تعديل الشروط والأحكام بنجاح",
+      "updatedError": "حدث خطأ أثناء تعديل الشروط والأحكام",
+      "deletedSuccess": "تم حذف الشروط والأحكام بنجاح",
+      "deletedError": "حدث خطأ أثناء حذف الشروط والأحكام"
+    }
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "email": "الرجاء إدخال بريد إلكتروني صحيح",
+    "password": "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل",
+    "confirmPassword": "كلمة المرور غير متطابقة",
+    "phone": "الرجاء إدخال رقم هاتف صحيح مكون من 11 رقم (مثال: 01234567890)",
+    "image": "الرجاء اختيار صورة",
+    "audio": "الرجاء اختيار صوتية",
+    "book": "الرجاء اختيار كتاب",
+    "article": "الرجاء اختيار مقال",
+    "category": "الرجاء اختيار تصنيف",
+    "chalet": "الرجاء اختيار عالم",
+    "title": "الرجاء إدخال عنوان",
+    "description": "الرجاء إدخال وصف",
+    "order": "الرجاء إدخال رقم الترتيب",
+    "name": "الرجاء إدخال اسم",
+    "content": "الرجاء إدخال محتوى",
+    "mainCategory": "الرجاء اختيار تصنيف رئيسي",
+    "subCategory": "الرجاء اختيار تصنيف فرعي",
+    "url": "الرجاء إدخال رابط"
+  }
+}
