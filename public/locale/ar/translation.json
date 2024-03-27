@@ -27,6 +27,8 @@
   "status": "الحالة",
   "approve": "مفعل",
   "pending": "قيد الانتظار",
+  "accepted": "مقبول",
+  "rejected": "مرفوض",
   "private": "خاص",
   "public": "عام",
   "active": "نشط",
@@ -67,6 +69,7 @@
     "termsAndConditions": "الشروط والأحكام",
     "messages": "الرسائل",
     "users": "المستخدمين",
+    "addChalet": "إضافة شاليه",
     "chalets": "الشاليهات",
     "brokers": "الوسطاء",
     "bookChalets": "حجوزات الشاليهات"
@@ -188,12 +191,81 @@
     "addTitle": "إضافة شاليه",
     "editTitle": "تعديل شاليه",
     "columns": {
-      "image": "الصورة",
-      "name": "الاسم",
-      "email": "البريد الإلكتروني",
-      "phone": "الهاتف",
-      "address": "العنوان",
-      "price": "السعر"
+      "image_area": "صورة المنطقة",
+      "name_area": "اسم المنطقة",
+      "sub_description_area": "وصف المنطقة",
+      "title": "العنوان",
+      "price": "السعر",
+      "description": "الوصف",
+      "image_array": "صورة الشاليه",
+      "Image_OwnerChalet": "صورة المالك",
+      "name_OwnerChalet": "اسم المالك",
+      "phone_OwnerChalet": "هاتف المالك",
+      "email_OwnerChalet": "بريد المالك",
+      "whatsapp_OwnerChalet": "واتساب المالك",
+      "Property_type": "نوع العقار",
+      "Display_type": "نوع العرض",
+      "space": "المساحة",
+      "number_rooms": "عدد الغرف",
+      "Furnishing": "الفرش",
+      "Bathroom": "الحمام",
+      "tag_name": "اسم العلامة",
+      "days": "الأيام",
+      "Registration_code": "كود التسجيل"
+    }
+  },
+  "addChalet": {
+    "title": "إضافة شاليه",
+    "addTitle": "إضافة شاليه",
+    "editTitle": "تعديل شاليه",
+    "columns": {
+      "title": "العنوان",
+      "price": "السعر",
+      "description": "الوصف",
+      "image_array": "إضافة صور الشاليه",
+      "Image_OwnerChalet": "صورة المالك",
+      "name_OwnerChalet": "اسم المالك",
+      "phone_OwnerChalet": "هاتف المالك",
+      "email_OwnerChalet": "بريد المالك",
+      "whatsapp_OwnerChalet": "واتساب المالك",
+      "name_area": "اسم المنطقة",
+      "image_area": "صورة المنطقة",
+      "sub_description_area": "وصف المنطقة",
+      "Property_type": "نوع العقار",
+      "Display_type": "نوع العرض",
+      "space": "المساحة",
+      "number_rooms": "عدد الغرف",
+      "Furnishing": "الفرش",
+      "Bathroom": "الحمام",
+      "tag_name": "اسم العلامة",
+      "days": "الأيام"
+    }
+  },
+  "editChalet": {
+    "title": "إضافة شاليه",
+    "addTitle": "إضافة شاليه",
+    "editTitle": "تعديل شاليه",
+    "columns": {
+      "title": "العنوان",
+      "price": "السعر",
+      "description": "الوصف",
+      "image_array": "تعديل صور الشاليه",
+      "Image_OwnerChalet": "صورة المالك",
+      "name_OwnerChalet": "اسم المالك",
+      "phone_OwnerChalet": "هاتف المالك",
+      "email_OwnerChalet": "بريد المالك",
+      "whatsapp_OwnerChalet": "واتساب المالك",
+      "name_area": "اسم المنطقة",
+      "image_area": "صورة المنطقة",
+      "sub_description_area": "وصف المنطقة",
+      "Property_type": "نوع العقار",
+      "Display_type": "نوع العرض",
+      "space": "المساحة",
+      "number_rooms": "عدد الغرف",
+      "Furnishing": "الفرش",
+      "Bathroom": "الحمام",
+      "tag_name": "اسم العلامة",
+      "days": "الأيام"
     }
   },
   "brokers": {
@@ -201,10 +273,9 @@
     "addTitle": "إضافة وسيط",
     "editTitle": "تعديل وسيط",
     "columns": {
-      "image": "الصورة",
       "name": "الاسم",
-      "email": "البريد الإلكتروني",
-      "phone": "الهاتف"
+      "phone": "الهاتف",
+      "Registration_code": "كود التسجيل"
     }
   },
   "bookChalets": {
@@ -215,7 +286,10 @@
       "user": {
         "name": "الاسم",
         "email": "البريد الإلكتروني",
-        "phone": "الهاتف"
+        "phone": "الهاتف",
+        "other_details": "تفاصيل أخرى",
+        "Departure_Date": "تاريخ المغادرة",
+        "date_arrival": "تاريخ الوصول"
       },
       "chalet": {
         "name": "الاسم الشاليه",
@@ -227,6 +301,10 @@
     }
   },
   "toast": {
+    "login": {
+      "success": "تم تسجيل الدخول بنجاح",
+      "error": "حدث خطأ أثناء تسجيل الدخول"
+    },
     "subAdmin": {
       "addedSuccess": "تم إضافة المسؤول الفرعي بنجاح",
       "addedError": "حدث خطأ أثناء إضافة المسؤول الفرعي",
@@ -279,6 +357,24 @@
     "content": "الرجاء إدخال محتوى",
     "mainCategory": "الرجاء اختيار تصنيف رئيسي",
     "subCategory": "الرجاء اختيار تصنيف فرعي",
-    "url": "الرجاء إدخال رابط"
+    "url": "الرجاء إدخال رابط",
+    "price": "الرجاء إدخال سعر",
+    "Property_type": "الرجاء إدخال نوع العقار",
+    "Display_type": "الرجاء إدخال نوع العرض",
+    "space": "الرجاء إدخال المساحة",
+    "number_rooms": "الرجاء إدخال عدد الغرف",
+    "Furnishing": "الرجاء إدخال الفرش",
+    "Bathroom": "الرجاء إدخال الحمام",
+    "name_OwnerChalet": "الرجاء إدخال اسم المالك",
+    "phone_OwnerChalet": "الرجاء إدخال هاتف المالك",
+    "email_OwnerChalet": "الرجاء إدخال بريد المالك",
+    "whatsapp_OwnerChalet": "الرجاء إدخال واتساب المالك",
+    "name_area": "الرجاء إدخال اسم المنطقة",
+    "sub_description_area": "الرجاء إدخال وصف المنطقة",
+    "tag_name": "الرجاء إدخال اسم العلامة",
+    "days": "الرجاء إدخال الأيام",
+    "image_area": "الرجاء اختيار صورة المنطقة",
+    "image_array": "الرجاء اختيار صور الشاليه",
+    "Image_OwnerChalet": "الرجاء اختيار صورة المالك"
   }
 }

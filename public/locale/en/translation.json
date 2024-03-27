@@ -27,6 +27,8 @@
   "status": "Status",
   "approve": "Approve",
   "pending": "Pending",
+  "accepted": "Accepted",
+  "rejected": "Rejected",
   "private": "Private",
   "public": "Public",
   "active": "Active",
@@ -68,6 +70,7 @@
     "slider": "Slider",
     "termsAndConditions": "Terms And Conditions",
     "messages": "Messages",
+    "addChalet": "Add Chalet",
     "chalets": "Chalets",
     "users": "Users",
     "brokers": "Brokers",
@@ -191,12 +194,81 @@
     "addTitle": "Add Chalet",
     "editTitle": "Edit Chalet",
     "columns": {
-      "image": "Image",
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
-      "address": "Address",
-      "price": "Price"
+      "title": "Title",
+      "price": "Price",
+      "description": "Description",
+      "image_array": "Image Chalet",
+      "Image_OwnerChalet": "Image Owner Chalet",
+      "name_OwnerChalet": "Name Owner Chalet",
+      "phone_OwnerChalet": "Phone Owner Chalet",
+      "email_OwnerChalet": "Email Owner Chalet",
+      "whatsapp_OwnerChalet": "Whatsapp Owner Chalet",
+      "name_area": "Name Area",
+      "image_area": "Image Area",
+      "sub_description_area": "Description Area",
+      "Property_type": "Property Type",
+      "Display_type": "Display Type",
+      "space": "Space",
+      "number_rooms": "Number Rooms",
+      "Furnishing": "Furnishing",
+      "Bathroom": "Bathroom",
+      "tag_name": "Tag Name",
+      "days": "Days",
+      "Registration_code": "Registration Code"
+    }
+  },
+  "addChalet": {
+    "title": "Chalets",
+    "addTitle": "Add Chalet",
+    "editTitle": "Edit Chalet",
+    "columns": {
+      "title": "Title",
+      "price": "Price",
+      "description": "Description",
+      "image_array": "Add Image Array",
+      "Image_OwnerChalet": "Image Owner Chalet",
+      "name_OwnerChalet": "Name Owner Chalet",
+      "phone_OwnerChalet": "Phone Owner Chalet",
+      "email_OwnerChalet": "Email Owner Chalet",
+      "whatsapp_OwnerChalet": "Whatsapp Owner Chalet",
+      "name_area": "Name Area",
+      "image_area": "Image Area",
+      "sub_description_area": "Sub Description Area",
+      "Property_type": "Property Type",
+      "Display_type": "Display Type",
+      "space": "Space",
+      "number_rooms": "Number Rooms",
+      "Furnishing": "Furnishing",
+      "Bathroom": "Bathroom",
+      "tag_name": "Tag Name",
+      "days": "Days"
+    }
+  },
+  "editChalet": {
+    "title": "Chalets",
+    "addTitle": "Add Chalet",
+    "editTitle": "Edit Chalet",
+    "columns": {
+      "title": "Title",
+      "price": "Price",
+      "description": "Description",
+      "image_array": "Edit Image Array",
+      "Image_OwnerChalet": "Image Owner Chalet",
+      "name_OwnerChalet": "Name Owner Chalet",
+      "phone_OwnerChalet": "Phone Owner Chalet",
+      "email_OwnerChalet": "Email Owner Chalet",
+      "whatsapp_OwnerChalet": "Whatsapp Owner Chalet",
+      "name_area": "Name Area",
+      "image_area": "Image Area",
+      "sub_description_area": "Sub Description Area",
+      "Property_type": "Property Type",
+      "Display_type": "Display Type",
+      "space": "Space",
+      "number_rooms": "Number Rooms",
+      "Furnishing": "Furnishing",
+      "Bathroom": "Bathroom",
+      "tag_name": "Tag Name",
+      "days": "Days"
     }
   },
   "brokers": {
@@ -204,10 +276,9 @@
     "addTitle": "Add Broker",
     "editTitle": "Edit Broker",
     "columns": {
-      "image": "Image",
       "name": "Name",
-      "email": "Email",
-      "phone": "Phone"
+      "phone": "Phone",
+      "Registration_code": "Registration Code"
     }
   },
   "bookChalets": {
@@ -218,7 +289,10 @@
       "user": {
         "name": "Name",
         "email": "Email",
-        "phone": "Phone"
+        "phone": "Phone",
+        "other_details": "Other Details",
+        "Departure_Date": "Departure Date",
+        "date_arrival": "Date Arrival"
       },
       "chalet": {
         "name": "Name of Chalet",
@@ -230,6 +304,10 @@
     }
   },
   "toast": {
+    "login": {
+      "success": "Logged in successfully",
+      "error": "An error occurred while logging in"
+    },
     "subAdmin": {
       "addedSuccess": "Sub Admin added successfully",
       "addedError": "An error occurred while adding sub admin",
@@ -282,6 +360,24 @@
     "content": "Please enter a content",
     "mainCategory": "Please choose a main category",
     "subCategory": "Please choose a sub category",
-    "url": "Please enter a valid URL"
+    "url": "Please enter a valid URL",
+    "price": "Please enter a valid price",
+    "Property_type": "Please enter Property type",
+    "Display_type": "Please enter Display type",
+    "space": "Please enter space",
+    "number_rooms": "Please enter number rooms",
+    "Furnishing": "Please enter Furnishing",
+    "Bathroom": "Please enter Bathroom",
+    "name_OwnerChalet": "Please enter name of the owner",
+    "phone_OwnerChalet": "Please enter phone of the owner",
+    "email_OwnerChalet": "Please enter email of the owner",
+    "whatsapp_OwnerChalet": "Please enter whatsapp of the owner",
+    "name_area": "Please enter name of the area",
+    "sub_description_area": "Please enter sub description of the area",
+    "tag_name": "Please enter tag name",
+    "days": "Please enter days",
+    "image_area": "Please enter image of the area",
+    "image_array": "Please enter image array",
+    "Image_OwnerChalet": "Please enter image of the owner"
   }
 }
