@@ -19,7 +19,6 @@ import { useFiltration } from "../../hooks";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { getBrokerChaletsApi } from "../../store/slices/brokerSlice";
-import Cookies from "js-cookie";
 
 const Chalets = ({ dashboard }) => {
   const { t } = useTranslation();

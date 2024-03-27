@@ -233,34 +233,34 @@ const AddChalet = () => {
     formik.handleChange(e);
   };
 
-  const [tag_name, setTag_name] = useState([]);
-  const [days, setDays] = useState([]);
+  // const [tag_name, setTag_name] = useState([]);
+  // const [days, setDays] = useState([]);
 
-  const addTag = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      if (e.target.value.length > 0) {
-        setTag_name([...tag_name, e.target.value]);
-      }
-    }
-  };
-  const removeTag = (removedTag) => {
-    const newTags = formik.values.tag_name.filter((tag) => tag !== removedTag);
-    formik.setFieldValue("tag_name", newTags);
-  };
-  const addDays = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      if (e.target.value.length > 0) {
-        setDays([...days, e.target.value]);
-      }
-      e.target.value = "";
-    }
-  };
-  const removeDay = (removedDay) => {
-    const newDays = formik.values.days.filter((day) => day !== removedDay);
-    setDays(newDays);
-  };
+  // const addTag = (e) => {
+  //   if (e.key === "Enter") {
+  //     e.preventDefault();
+  //     if (e.target.value.length > 0) {
+  //       setTag_name([...tag_name, e.target.value]);
+  //     }
+  //   }
+  // };
+  // const removeTag = (removedTag) => {
+  //   const newTags = formik.values.tag_name.filter((tag) => tag !== removedTag);
+  //   formik.setFieldValue("tag_name", newTags);
+  // };
+  // const addDays = (e) => {
+  //   if (e.key === "Enter") {
+  //     e.preventDefault();
+  //     if (e.target.value.length > 0) {
+  //       setDays([...days, e.target.value]);
+  //     }
+  //     e.target.value = "";
+  //   }
+  // };
+  // const removeDay = (removedDay) => {
+  //   const newDays = formik.values.days.filter((day) => day !== removedDay);
+  //   setDays(newDays);
+  // };
 
   useEffect(() => {
     try {

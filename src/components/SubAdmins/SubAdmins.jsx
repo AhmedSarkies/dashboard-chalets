@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Modal, ModalBody, ModalHeader, Row, Spinner } from "reactstrap";
-import { MdAdd, MdDeleteOutline, MdEdit } from "react-icons/md";
+import { MdAdd,  MdEdit } from "react-icons/md";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import { IoMdClose } from "react-icons/io";
 import {
-  deleteSubAdmin,
+  // deleteSubAdmin,
   getSubAdmins,
   addSubAdmin,
   updateSubAdmin,
 } from "../../store/slices/subAdminSlice";
 import { useFormik } from "formik";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { useFiltration, useSchema } from "../../hooks";
@@ -98,35 +98,35 @@ const SubAdmins = ({ dashboard }) => {
     formik.handleChange(e);
   };
 
-  // Delete Sub Admin
-  const handleDelete = (subAdmin) => {
-    Swal.fire({
-      title: `هل انت متأكد من حذف ${subAdmin?.name}؟`,
-      text: "لن تتمكن من التراجع عن هذا الاجراء!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#0d1d34",
-      confirmButtonText: "نعم, احذفه!",
-      cancelButtonText: "الغاء",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(deleteSubAdmin(subAdmin.id)).then((res) => {
-          if (!res.error) {
-            dispatch(getSubAdmins());
-            Swal.fire({
-              title: `تم حذف ${subAdmin?.name}`,
-              text: `تم حذف ${subAdmin?.name} بنجاح`,
-              icon: "success",
-              confirmButtonColor: "#0d1d34",
-            }).then(() => toast.success(t("toast.subAdmin.deleteSuccess")));
-          } else {
-            toast.error(t("toast.subAdmin.deleteError"));
-          }
-        });
-      }
-    });
-  };
+  // // Delete Sub Admin
+  // const handleDelete = (subAdmin) => {
+  //   Swal.fire({
+  //     title: `هل انت متأكد من حذف ${subAdmin?.name}؟`,
+  //     text: "لن تتمكن من التراجع عن هذا الاجراء!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#d33",
+  //     cancelButtonColor: "#0d1d34",
+  //     confirmButtonText: "نعم, احذفه!",
+  //     cancelButtonText: "الغاء",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       dispatch(deleteSubAdmin(subAdmin.id)).then((res) => {
+  //         if (!res.error) {
+  //           dispatch(getSubAdmins());
+  //           Swal.fire({
+  //             title: `تم حذف ${subAdmin?.name}`,
+  //             text: `تم حذف ${subAdmin?.name} بنجاح`,
+  //             icon: "success",
+  //             confirmButtonColor: "#0d1d34",
+  //           }).then(() => toast.success(t("toast.subAdmin.deleteSuccess")));
+  //         } else {
+  //           toast.error(t("toast.subAdmin.deleteError"));
+  //         }
+  //       });
+  //     }
+  //   });
+  // };
 
   // Filtration, Sorting, Pagination
   // Columns
