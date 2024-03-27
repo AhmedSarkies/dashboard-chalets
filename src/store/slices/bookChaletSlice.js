@@ -4,8 +4,6 @@ import Http from "../../Http";
 // Initial State
 const initialState = {
   bookChalets: [],
-  acceptBookChalet: {},
-  rejectBookChalet: {},
   loading: false,
   error: null,
 };
@@ -38,7 +36,7 @@ export const acceptBookChaletApi = createAsyncThunk(
       await Http({
         method: "POST",
         url: `/Bookshalihat/acceptBook`,
-        params: { id: id },
+        params: { id },
       }).then((response) => {
         return response.data;
       });
@@ -56,7 +54,25 @@ export const rejectBookChaletApi = createAsyncThunk(
       await Http({
         method: "POST",
         url: `/Bookshalihat/rejectBook`,
-        params: { id: id },
+        params: { id },
+      }).then((response) => {
+        return response.data;
+      });
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Delete Book Chalet using Axios and Redux Thunk
+export const deleteBookChaletApi = createAsyncThunk(
+  "bookChalet/deleteBookChaletApi",
+  async (id, { rejectWithValue }) => {
+    try {
+      await Http({
+        method: "POST",
+        url: `/Bookshalihat/Delete`,
+        params: { id },
       }).then((response) => {
         return response.data;
       });
@@ -84,7 +100,7 @@ const brokerSlice = createSlice({
     });
     // Fulfilled
     builder.addCase(getBookChaletsApi.fulfilled, (state, action) => {
-      state.brokers = action.payload;
+      state.bookChalets = action.payload;
       state.loading = false;
     });
     // Rejected
@@ -100,7 +116,6 @@ const brokerSlice = createSlice({
     // Fulfilled
     builder.addCase(acceptBookChaletApi.fulfilled, (state, action) => {
       state.loading = false;
-      state.acceptBookChalet = action.payload;
     });
     // Rejected
     builder.addCase(acceptBookChaletApi.rejected, (state, action) => {
@@ -115,10 +130,23 @@ const brokerSlice = createSlice({
     // Fulfilled
     builder.addCase(rejectBookChaletApi.fulfilled, (state, action) => {
       state.loading = false;
-      state.rejectBookChalet = action.payload;
     });
     // Rejected
     builder.addCase(rejectBookChaletApi.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // ======Delete Chalet======
+    // Pending
+    builder.addCase(deleteBookChaletApi.pending, (state, action) => {
+      state.loading = true;
+    });
+    // Fulfilled
+    builder.addCase(deleteBookChaletApi.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    // Rejected
+    builder.addCase(deleteBookChaletApi.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

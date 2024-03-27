@@ -4,6 +4,7 @@ import Http from "../../Http";
 // Initial State
 const initialState = {
   chalets: [],
+  chalet: [],
   loading: false,
   error: null,
 };
@@ -16,10 +17,23 @@ export const getChaletsApi = createAsyncThunk(
       const response = await Http({
         method: "GET",
         url: "/Chalet/Get",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Get Chalet By ID using Axios and Redux Thunk
+export const getChaletByIdApi = createAsyncThunk(
+  "chalet/getChaletByIdApi",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await Http({
+        method: "POST",
+        url: "Chalet/Get_id",
+        params: { id },
       });
       return response.data;
     } catch (error) {
@@ -126,6 +140,21 @@ const chaletSlice = createSlice({
     });
     // Rejected
     builder.addCase(getChaletsApi.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // ======Get Chalet By ID======
+    // Pending
+    builder.addCase(getChaletByIdApi.pending, (state, action) => {
+      state.loading = true;
+    });
+    // Fulfilled
+    builder.addCase(getChaletByIdApi.fulfilled, (state, action) => {
+      state.chalet = action.payload;
+      state.loading = false;
+    });
+    // Rejected
+    builder.addCase(getChaletByIdApi.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

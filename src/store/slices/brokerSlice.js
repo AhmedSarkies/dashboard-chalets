@@ -4,6 +4,7 @@ import Http from "../../Http";
 // Initial State
 const initialState = {
   brokers: [],
+  brokerChalets: [],
   loading: false,
   error: null,
 };
@@ -15,11 +16,26 @@ export const getBrokersApi = createAsyncThunk(
     try {
       const response = await Http({
         method: "GET",
-        url: "/Broker/Get",
+        url: "/Broker/Get_Broker",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const getBrokerChaletsApi = createAsyncThunk(
+  "broker/getBrokerChaletsApi",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await Http({
+        method: "POST",
+        url: "/Broker/Get_id",
+        params: { id },
       });
       return response.data;
     } catch (error) {
@@ -36,6 +52,24 @@ export const addBrokerApi = createAsyncThunk(
       await Http({
         method: "POST",
         url: `/Broker/store_Broker`,
+        data,
+      }).then((response) => {
+        return response.data;
+      });
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Add Broker Chalet using Axios and Redux Thunk
+export const addBrokerChaletApi = createAsyncThunk(
+  "broker/addBrokerChaletApi",
+  async (data, { rejectWithValue }) => {
+    try {
+      await Http({
+        method: "POST",
+        url: `/Broker/storeBrokerChalet`,
         data,
       }).then((response) => {
         return response.data;
@@ -129,7 +163,22 @@ const brokerSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
-    // ======Add Chalet======
+    // ======Get Broker Chalets======
+    // Pending
+    builder.addCase(getBrokerChaletsApi.pending, (state, action) => {
+      state.loading = true;
+    });
+    // Fulfilled
+    builder.addCase(getBrokerChaletsApi.fulfilled, (state, action) => {
+      state.brokerChalets = action.payload;
+      state.loading = false;
+    });
+    // Rejected
+    builder.addCase(getBrokerChaletsApi.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // ======Add Broker======
     // Pending
     builder.addCase(addBrokerApi.pending, (state, action) => {
       state.loading = true;
@@ -143,7 +192,22 @@ const brokerSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
-    // ======Update Chalet======
+    // ======Add Broker Chalet======
+    // Pending
+    builder.addCase(addBrokerChaletApi.pending, (state, action) => {
+      state.loading = true;
+    });
+    // Fulfilled
+    builder.addCase(addBrokerChaletApi.fulfilled, (state, action) => {
+      state.loading = false;
+      state.brokerChalets.push(action.payload);
+    });
+    // Rejected
+    builder.addCase(addBrokerChaletApi.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // ======Update Broker======
     // Pending
     builder.addCase(updateBrokerApi.pending, (state, action) => {
       state.loading = true;
@@ -157,7 +221,7 @@ const brokerSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
-    // ======Delete Chalet======
+    // ======Delete Broker======
     // Pending
     builder.addCase(deleteBrokerApi.pending, (state, action) => {
       state.loading = true;
