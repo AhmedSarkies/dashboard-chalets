@@ -304,14 +304,7 @@ const Brokers = ({ dashboard }) => {
                     </td>
                   )}
                   {toggle.toggleColumns.Registration_code && (
-                    <td className="table-td">
-                      <a
-                        className="text-white"
-                        href={`tel:${result?.Registration_code}`}
-                      >
-                        {result?.Registration_code}
-                      </a>
-                    </td>
+                    <td className="table-td">{result?.Registration_code}</td>
                   )}
                 </tr>
               ))}
