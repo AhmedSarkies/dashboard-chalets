@@ -318,7 +318,9 @@ const BookChalets = () => {
                     </td>
                   )}
                   {toggle.toggleColumns.other_details && (
-                    <td className="table-td">{result?.other_details}</td>
+                    <td className="table-td">
+                      {result?.other_details?.slice(0, 15)}...
+                    </td>
                   )}
                   {toggle.toggleColumns.date_arrival && (
                     <td className="table-td">{result?.date_arrival}</td>
