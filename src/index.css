@@ -657,6 +657,7 @@ body {
   align-items: center;
   margin: 0.625rem;
   margin-bottom: 2rem;
+  min-width: 768px;
 }
 .scholar.most-listening .table-header {
   display: flex;
@@ -1258,6 +1259,7 @@ div[tabindex] {
   font-weight: 600;
   padding: 0.25rem 0.5rem;
   border-radius: 5px;
+  font-size: 0.6rem;
 }
 .pending {
   background: #ff9800;
@@ -1345,6 +1347,13 @@ div[tabindex] {
   .overlay.active {
     display: block;
   }
+  .status {
+    padding: 0.25rem 0.3rem;
+    font-size: 0.4rem;
+  }
+  .table-td.control svg {
+    font-size: 1rem !important;
+  }
 }
 @media only screen and (max-width: 992px) {
   .audio-track-container audio {
@@ -1380,6 +1389,9 @@ div[tabindex] {
   }
   .dropdown .dropdown-btn {
     width: 100px !important;
+  }
+  .table-td {
+    padding: 5px;
   }
 }
 @media only screen and (max-width: 768px) {
