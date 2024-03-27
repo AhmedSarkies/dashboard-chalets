@@ -911,6 +911,8 @@ div[tabindex] {
   cursor: pointer;
 }
 /* ============= */
+.form-label.tag-name,
+.form-label.images-array-label,
 .form-group-container .form-label {
   color: var(--text-color);
   font-size: 1.2rem;
@@ -942,6 +944,8 @@ div[tabindex] {
   text-align: end;
   position: relative;
   width: 100%;
+  max-height: 40px;
+  resize: none;
   font-size: 0.8rem;
 }
 [lang="en"] .form-group-container .form-input {
@@ -956,6 +960,17 @@ div[tabindex] {
   height: 120px;
   object-fit: cover;
   border-radius: 50%;
+  cursor: pointer;
+}
+.image-preview-container {
+  position: relative;
+}
+.delete-icon {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.25rem;
+  color: red;
   cursor: pointer;
 }
 .form-group-container .add-btn,
@@ -1170,6 +1185,7 @@ div[tabindex] {
 }
 [lang="en"] .dropdown-content .item.filter span {
   direction: ltr;
+  flex: 3;
 }
 .dropdown-content .item.filter:focus {
   background: transparent;
@@ -1199,6 +1215,7 @@ div[tabindex] {
 }
 .scholar .checkbox-column {
   position: relative;
+  flex: 1;
   width: 40px;
   height: 20px;
   appearance: none;
@@ -1235,6 +1252,56 @@ div[tabindex] {
 }
 [lang="en"] .scholar .checkbox-column:after {
   left: 20px;
+}
+.status {
+  color: #fff;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+}
+.pending {
+  background: #ff9800;
+}
+.accepted {
+  background: #4caf50;
+}
+.rejected {
+  background: #f44336;
+}
+/* Tag Name */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-height: 100px;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--main-color);
+  padding: 10px;
+}
+.tag {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  height: 25px;
+  width: fit-content;
+  margin: 2px 5px 2px 0px;
+  color: var(--main-color);
+}
+.form-input input {
+  border: none;
+  flex: 1;
+  outline: none;
+  padding: 5px;
+  background: transparent;
+  text-align: end;
+  color: var(--main-color);
+}
+.tag span {
+  margin-left: 5px;
+  color: red;
+  cursor: pointer;
 }
 
 /* Media Screens */
@@ -1311,9 +1378,8 @@ div[tabindex] {
   .modal-content.modal-add-scholar.modal-preview-image img {
     max-width: 300px;
   }
-  .dropdown-content,
   .dropdown .dropdown-btn {
-    width: 100%;
+    width: 100px !important;
   }
 }
 @media only screen and (max-width: 768px) {
