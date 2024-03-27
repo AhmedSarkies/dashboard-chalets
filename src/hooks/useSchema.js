@@ -31,16 +31,9 @@ const useSchema = () => {
         .min(1000000000, t("validation.phone"))
         .max(9999999999, t("validation.phone"))
         .required(t("validation.phone")),
-      status: string(),
-      // Validation for image file must be uploaded with the form or just string
-      image: mixed().test("fileSize", t("validation.image"), (value) => {
-        if (value.file) {
-          return value.file.size <= 2097152;
-        }
-        if (typeof value === "string") {
-          return true;
-        }
-      }),
+      password: string()
+        .min(8, t("validation.password"))
+        .required(t("validation.password")),
     }),
     settings: object().shape({
       image: mixed().notRequired(),
@@ -81,109 +74,123 @@ const useSchema = () => {
     }),
     chalets: object().shape({
       title: string().required(t("validation.title")),
+      price: string().required(t("validation.price")),
       description: string().required(t("validation.description")),
-      image_array: mixed().test("fileSize", t("validation.image"), (value) => {
-        if (value.file) {
-          return value.file.size <= 2097152;
-        }
-        if (typeof value === "string") {
-          return true;
-        }
-      }),
-      Image_OwnerChalet: mixed().test(
-        "fileSize",
-        t("validation.image"),
-        (value) => {
+      image_array: mixed().required(t("validation.image_array")).notRequired(),
+      Image_OwnerChalet: mixed()
+        .test("fileSize", t("validation.Image_OwnerChalet"), (value) => {
           if (value.file) {
             return value.file.size <= 2097152;
           }
           if (typeof value === "string") {
             return true;
           }
-        }
-      ),
-      name_OwnerChalet: string().required(t("validation.chalet")),
+        })
+        .notRequired(),
+      name_OwnerChalet: string().required(t("validation.name_OwnerChalet")),
       phone_OwnerChalet: number()
         .typeError(t("validation.phone"))
         .positive(t("validation.phone"))
         .integer(t("validation.phone"))
-        .min(10000000000, t("validation.phone"))
-        .max(99999999999, t("validation.phone"))
-        .required(t("validation.phone")),
+        .min(1000000000, t("validation.phone"))
+        .max(9999999999, t("validation.phone"))
+        .required(t("validation.phone_OwnerChalet")),
       email_OwnerChalet: string()
-        .email(t("validation.email"))
-        .required(t("validation.email")),
+        .email(t("validation.email_OwnerChalet"))
+        .required(t("validation.email_OwnerChalet")),
       whatsapp_OwnerChalet: number()
-        .typeError(t("validation.phone"))
-        .positive(t("validation.phone"))
-        .integer(t("validation.phone"))
-        .min(10000000000, t("validation.phone"))
-        .max(99999999999, t("validation.phone"))
-        .required(t("validation.phone")),
-      name_area: string().required(t("validation.chalet")),
-      image_area: mixed().test("fileSize", t("validation.image"), (value) => {
-        if (value.file) {
-          return value.file.size <= 2097152;
-        }
-        if (typeof value === "string") {
+        .typeError(t("validation.whatsapp_OwnerChalet"))
+        .positive(t("validation.whatsapp_OwnerChalet"))
+        .integer(t("validation.whatsapp_OwnerChalet"))
+        .min(1000000000, t("validation.whatsapp_OwnerChalet"))
+        .max(9999999999, t("validation.whatsapp_OwnerChalet"))
+        .required(t("validation.whatsapp_OwnerChalet")),
+      name_area: string().required(t("validation.name_area")),
+      image_area: mixed()
+        .test("fileSize", t("validation.image_area"), (value) => {
+          if (value.file) {
+            return value.file.size <= 2097152;
+          }
+          if (typeof value === "string") {
+            return true;
+          }
+        })
+        .notRequired(),
+      sub_description_area: string().required(
+        t("validation.sub_description_area")
+      ),
+      Property_type: string().required(t("validation.Property_type")),
+      Display_type: string().required(t("validation.Display_type")),
+      space: string().required(t("validation.space")),
+      number_rooms: string().required(t("validation.number_rooms")),
+      Furnishing: string().required(t("validation.Furnishing")),
+      Bathroom: string().required(t("validation.Bathroom")),
+      tag_name: mixed().test("array", t("validation.tag_name"), (value) => {
+        if (Array.isArray(value) && value.length > 0) {
           return true;
         }
       }),
-      sub_description_area: string().required(t("validation.description")),
-      Property_type: string().required(t("validation.chalet")),
-      Display_type: string().required(t("validation.chalet")),
-      space: number()
-        .typeError(t("validation.space"))
-        .positive(t("validation.space"))
-        .integer(t("validation.space"))
-        .min(1, t("validation.space"))
-        .max(99999999999, t("validation.space"))
-        .required(t("validation.space")),
-      number_rooms: number()
-        .typeError(t("validation.number_rooms"))
-        .positive(t("validation.number_rooms"))
-        .integer(t("validation.number_rooms"))
-        .min(1, t("validation.number_rooms"))
-        .max(99999999999, t("validation.number_rooms"))
-        .required(t("validation.number_rooms")),
-      Furnishing: string().required(t("validation.chalet")),
-      Bathroom: number()
-        .typeError(t("validation.Bathroom"))
-        .positive(t("validation.Bathroom"))
-        .integer(t("validation.Bathroom"))
-        .min(1, t("validation.Bathroom"))
-        .max(99999999999, t("validation.Bathroom"))
-        .required(t("validation.Bathroom")),
-      price: number()
-        .typeError(t("validation.price"))
-        .positive(t("validation.price"))
-        .integer(t("validation.price"))
-        .min(1, t("validation.price"))
-        .max(99999999999, t("validation.price"))
-        .required(t("validation.price")),
+      days: mixed().test("array", t("validation.days"), (value) => {
+        if (Array.isArray(value) && value.length > 0) {
+          return true;
+        }
+      }),
+    }),
+    updateChalet: object().shape({
+      title: string().required(t("validation.title")),
+      price: string().required(t("validation.price")),
+      description: string().required(t("validation.description")),
+      image_array: mixed().notRequired(),
+      Image_OwnerChalet: mixed().notRequired(),
+      name_OwnerChalet: string().required(t("validation.name_OwnerChalet")),
+      phone_OwnerChalet: number()
+        .typeError(t("validation.phone"))
+        .positive(t("validation.phone"))
+        .integer(t("validation.phone"))
+        .min(1000000000, t("validation.phone"))
+        .max(9999999999, t("validation.phone"))
+        .required(t("validation.phone_OwnerChalet")),
+      email_OwnerChalet: string()
+        .email(t("validation.email_OwnerChalet"))
+        .required(t("validation.email_OwnerChalet")),
+      whatsapp_OwnerChalet: number()
+        .typeError(t("validation.whatsapp_OwnerChalet"))
+        .positive(t("validation.whatsapp_OwnerChalet"))
+        .integer(t("validation.whatsapp_OwnerChalet"))
+        .min(1000000000, t("validation.whatsapp_OwnerChalet"))
+        .max(9999999999, t("validation.whatsapp_OwnerChalet"))
+        .required(t("validation.whatsapp_OwnerChalet")),
+      name_area: string().required(t("validation.name_area")),
+      image_area: mixed().notRequired(),
+      sub_description_area: string().required(
+        t("validation.sub_description_area")
+      ),
+      Property_type: string().required(t("validation.Property_type")),
+      Display_type: string().required(t("validation.Display_type")),
+      space: string().required(t("validation.space")),
+      number_rooms: string().required(t("validation.number_rooms")),
+      Furnishing: string().required(t("validation.Furnishing")),
+      Bathroom: string().required(t("validation.Bathroom")),
+      tag_name: mixed().test("array", t("validation.tag_name"), (value) => {
+        if (Array.isArray(value) && value.length > 0) {
+          return true;
+        }
+      }),
+      days: mixed().test("array", t("validation.days"), (value) => {
+        if (Array.isArray(value) && value.length > 0) {
+          return true;
+        }
+      }),
     }),
     brokers: object().shape({
-      name: string().required(t("validation.chalet")),
-      email: string()
-        .email(t("validation.email"))
-        .required(t("validation.email")),
-      phone: number()
+      Fullname: string().required(t("validation.Fullname")),
+      phone_number: number()
         .typeError(t("validation.phone"))
         .positive(t("validation.phone"))
         .integer(t("validation.phone"))
-        .min(10000000000, t("validation.phone"))
-        .max(99999999999, t("validation.phone"))
+        .min(1000000000, t("validation.phone"))
+        .max(9999999999, t("validation.phone"))
         .required(t("validation.phone")),
-      status: string(),
-      // Validation for image file must be uploaded with the form or just string
-      image: mixed().test("fileSize", t("validation.image"), (value) => {
-        if (value.file) {
-          return value.file.size <= 2097152;
-        }
-        if (typeof value === "string") {
-          return true;
-        }
-      }),
     }),
   };
 
