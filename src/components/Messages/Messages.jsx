@@ -55,7 +55,7 @@ const Messages = () => {
     handleSort,
     handleSearch,
     handleToggleColumns,
-    results,
+    searchResults,
   } = useFiltration({
     rowData: messages,
     toggle,
@@ -123,7 +123,7 @@ const Messages = () => {
                 <button
                   type="button"
                   key={column.id}
-                  className={`item filter`}
+                  className="item filter d-flex justify-content-end"
                   onClick={() => handleToggleColumns(column.name)}
                 >
                   <span className="d-flex justify-content-start align-items-center gap-2">
@@ -244,7 +244,7 @@ const Messages = () => {
             </tbody>
           )}
           {/* No Data */}
-          {results?.length === 0 && error === null && !loading && (
+          {searchResults?.length === 0 && error === null && !loading && (
             <tbody>
               <tr className="no-data-container">
                 <td className="table-td" colSpan="5">
@@ -266,9 +266,9 @@ const Messages = () => {
             </tbody>
           )}
           {/* Data */}
-          {results?.length > 0 && error === null && loading === false && (
+          {searchResults?.length > 0 && error === null && loading === false && (
             <tbody>
-              {results?.map((result) => (
+              {searchResults?.map((result) => (
                 <tr key={result?.id + new Date().getDate()}>
                   <td className="table-td name">{result?.first_name}</td>
                   <td className="table-td phone">
@@ -350,7 +350,7 @@ const Messages = () => {
         </table>
       </div>
       {/* Pagination */}
-      {results.length > 0 && error === null && loading === false && (
+      {searchResults.length > 0 && error === null && loading === false && (
         <PaginationUI />
       )}
     </div>

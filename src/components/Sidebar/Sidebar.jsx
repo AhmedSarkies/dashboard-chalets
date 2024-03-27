@@ -19,7 +19,7 @@ const Sidebar = ({ menu, linkItems, logo }) => {
       </div>
       <div className="sidebar-body">
         <ul className="sidebar-list">
-          {linkItems.slice(0, 3).map((item, index) => (
+          {linkItems.map((item, index) => (
             <li className="sidebar-item" key={index}>
               <NavLink
                 className={({ isActive }) =>
@@ -32,7 +32,7 @@ const Sidebar = ({ menu, linkItems, logo }) => {
               </NavLink>
             </li>
           ))}
-          <div className="sidebar-item dropdown">
+          {/* <div className="sidebar-item dropdown">
             <UncontrolledAccordion stayOpen>
               <AccordionItem>
                 <AccordionHeader targetId="1">
@@ -70,7 +70,7 @@ const Sidebar = ({ menu, linkItems, logo }) => {
                 {item.title}
               </NavLink>
             </li>
-          ))}
+          ))} */}
         </ul>
       </div>
     </div>

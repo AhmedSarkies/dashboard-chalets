@@ -196,9 +196,7 @@ const Dashboard = () => {
       </div>*/}
       <div className="dashboard-users mb-5 p-4">
         <Row>
-          <Col xl="12">
-            <SubAdmins dashboard={true} />
-          </Col>
+          <Col xl="12">{/* <SubAdmins dashboard={true} /> */}</Col>
           <Col xl="12">
             <Chalets dashboard={true} />
           </Col>

@@ -1,29 +1,51 @@
 import i18next from "i18next";
 import Cookies from "js-cookie";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { MdMenu, MdOutlineLogout } from "react-icons/md";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import Http from "../../Http";
 
 const Header = ({ menu, toggleMenu, linkItems }) => {
-  const navigate = useNavigate();
   const location = useLocation();
   const lng = Cookies.get("i18next") || "ar";
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     document.documentElement.lang = lng;
   }, [lng]);
+
+  // Logout Function
+  const logout = async () => {
+    setLoading(true);
+    try {
+      const response = await Http({
+        method: "POST",
+        url: "/Chalet/logout",
+      });
+      if (response.status === 200) {
+        setLoading(false);
+        Cookies.remove("_auth");
+        window.location.href = "/chalets/login";
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
       <div className={`overlay${menu ? " active" : ""}`}></div>
       <div className="dashboard-header">
         <div className="dashboard-header-btns">
-          <button
-            className="btn logout-btn"
-            onClick={() => navigate("/chalets/login", { replace: true })}
-          >
-            <MdOutlineLogout />
-            {lng === "en" ? "Logout" : "تسجيل الخروج"}
+          <button className="btn logout-btn" onClick={logout}>
+            {loading ? (
+              "Loading..."
+            ) : (
+              <>
+                <MdOutlineLogout />
+                {lng === "en" ? "Logout" : "تسجيل الخروج"}
+              </>
+            )}
           </button>
           <button
             className="btn lang-btn"

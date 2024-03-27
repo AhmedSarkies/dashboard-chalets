@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { IoMdHome } from "react-icons/io";
+import { IoMdAddCircleOutline, IoMdHome } from "react-icons/io";
 import { SiIobroker } from "react-icons/si";
 import {
   MdAdminPanelSettings,
@@ -25,22 +25,27 @@ const Home = () => {
       path: "/chalets/sub-admins",
       icon: <MdAdminPanelSettings />,
     },
+    // {
+    //   title: t("linkItems.messages"),
+    //   path: "/chalets/messages",
+    //   icon: <MdOutlineMarkunread />,
+    // },
+    // {
+    //   title: t("linkItems.settingsApp"),
+    //   path: "/chalets/settings",
+    // },
+    // {
+    //   title: t("linkItems.slider"),
+    //   path: "/chalets/slider",
+    // },
+    // {
+    //   title: t("linkItems.termsAndConditions"),
+    //   path: "/chalets/terms&conditions",
+    // },
     {
-      title: t("linkItems.messages"),
-      path: "/chalets/messages",
-      icon: <MdOutlineMarkunread />,
-    },
-    {
-      title: t("linkItems.settingsApp"),
-      path: "/chalets/settings",
-    },
-    {
-      title: t("linkItems.slider"),
-      path: "/chalets/slider",
-    },
-    {
-      title: t("linkItems.termsAndConditions"),
-      path: "/chalets/terms&conditions",
+      title: t("linkItems.addChalet"),
+      path: "/chalets/add-chalet",
+      icon: <IoMdAddCircleOutline />,
     },
     {
       title: t("linkItems.chalets"),
