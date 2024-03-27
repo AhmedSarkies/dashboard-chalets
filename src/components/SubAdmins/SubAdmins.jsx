@@ -8,6 +8,7 @@ import {
   deleteSubAdmin,
   getSubAdmins,
   addSubAdmin,
+  updateSubAdmin,
 } from "../../store/slices/subAdminSlice";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
@@ -47,41 +48,48 @@ const SubAdmins = ({ dashboard }) => {
     },
     validationSchema: validationSchema.subAdmins,
     onSubmit: (values) => {
-      // if email and phone is already exist with another scholar if just i change them to new values
-      if (subAdmins.length > 0) {
-        const emailExist = subAdmins.find(
-          (scholar) => scholar.email === formik.values.email
-        );
-        const phoneExist = subAdmins.find(
-          (scholar) => scholar.phone === formik.values.phone
-        );
-        if (emailExist && emailExist.id !== formik.values.id) {
-          toast.error(t("emailExisted"));
-          return;
-        }
-        if (phoneExist && phoneExist.id !== formik.values.id) {
-          toast.error(t("phoneExisted"));
-          return;
-        }
-      }
       const formData = new FormData();
       formData.append("Fullname", formik.values.name);
       formData.append("email", formik.values.email);
       formData.append("password", formik.values.password);
       formData.append("phone_number", formik.values.phone);
-      dispatch(addSubAdmin(formData)).then((res) => {
-        dispatch(getSubAdmins());
-        if (!res.error) {
-          toast.success(t("toast.subAdmin.addedSuccess"));
-          formik.handleReset();
-          setToggle({
-            ...toggle,
-            add: !toggle.add,
-          });
-        } else {
-          toast.error(t("toast.subAdmin.addedError"));
-        }
-      });
+      if (values.id) {
+        dispatch(
+          updateSubAdmin({
+            id: formik.values.id,
+            Fullname: formik.values.name,
+            email: formik.values.email,
+            password: formik.values.password,
+            phone_number: formik.values.phone,
+          })
+        ).then((res) => {
+          dispatch(getSubAdmins());
+          if (!res.error) {
+            toast.success(t("toast.subAdmin.updatedSuccess"));
+            formik.handleReset();
+            setToggle({
+              ...toggle,
+              add: !toggle.add,
+            });
+          } else {
+            toast.error(t("toast.subAdmin.updatedError"));
+          }
+        });
+      } else {
+        dispatch(addSubAdmin(formData)).then((res) => {
+          dispatch(getSubAdmins());
+          if (!res.error) {
+            toast.success(t("toast.subAdmin.addedSuccess"));
+            formik.handleReset();
+            setToggle({
+              ...toggle,
+              add: !toggle.add,
+            });
+          } else {
+            toast.error(t("toast.subAdmin.addedError"));
+          }
+        });
+      }
     },
   });
 
@@ -374,10 +382,10 @@ const SubAdmins = ({ dashboard }) => {
                   {toggle.toggleColumns.control && (
                     <td className="table-td">
                       <span className="table-btn-container">
-                        <MdDeleteOutline
+                        {/* <MdDeleteOutline
                           className="delete-btn"
                           onClick={() => handleDelete(result)}
-                        />
+                        /> */}
                         <MdEdit
                           className="edit-btn"
                           onClick={() => {
@@ -428,7 +436,7 @@ const SubAdmins = ({ dashboard }) => {
             });
           }}
         >
-          {t("subAdmin.addTitle")}
+          {formik.values.id ? t("subAdmin.editTitle") : t("subAdmin.addTitle")}
           <IoMdClose
             onClick={() => {
               formik.handleReset();
@@ -533,6 +541,8 @@ const SubAdmins = ({ dashboard }) => {
                         role="status"
                         aria-hidden="true"
                       ></span>
+                    ) : formik.values.id ? (
+                      t("save")
                     ) : (
                       t("add")
                     )}

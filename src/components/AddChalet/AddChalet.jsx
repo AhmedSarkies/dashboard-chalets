@@ -12,6 +12,7 @@ import {
   updateChaletApi,
 } from "../../store/slices/chaletSlice";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const initialValues = {
   title: "",
@@ -92,11 +93,16 @@ const AddChalet = () => {
             image_array: values.image_array,
             Image_OwnerChalet: values.Image_OwnerChalet.file,
             image_area: values.image_area.file,
+            tag_name: [],
+            days: [],
           })
         ).then((res) => {
           if (res.meta.requestStatus === "fulfilled") {
             formik.handleReset();
             navigate("/chalets/chalets");
+            toast.success(t("chalets.updatedSuccess"));
+          } else {
+            toast.error(t("chalets.updatedError"));
           }
         });
       } else if (registrationCode) {
@@ -106,10 +112,15 @@ const AddChalet = () => {
           Image_OwnerChalet: values.Image_OwnerChalet.file,
           image_area: values.image_area.file,
           Registration_code: registrationCode,
+          tag_name: [],
+          days: [],
         }).then((res) => {
           if (res.meta.requestStatus === "fulfilled") {
             formik.handleReset();
             navigate("/chalets/chalets");
+            toast.success(t("chalets.updatedSuccess"));
+          } else {
+            toast.error(t("chalets.updatedError"));
           }
         });
       } else {
@@ -119,11 +130,16 @@ const AddChalet = () => {
             image_array: toggle?.images?.map((image) => image.file),
             Image_OwnerChalet: values.Image_OwnerChalet.file,
             image_area: values.image_area.file,
+            tag_name: [],
+            days: [],
           })
         ).then((res) => {
           if (res.meta.requestStatus === "fulfilled") {
             formik.handleReset();
             navigate("/chalets/chalets");
+            toast.success(t("chalets.addedSuccess"));
+          } else {
+            toast.error(t("chalets.addedError"));
           }
         });
       }
@@ -217,15 +233,14 @@ const AddChalet = () => {
     formik.handleChange(e);
   };
 
+  const [tag_name, setTag_name] = useState([]);
+  const [days, setDays] = useState([]);
+
   const addTag = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (e.target.value.length > 0) {
-        formik.setFieldValue("tag_name", [
-          ...formik.values.tag_name,
-          e.target.value,
-        ]);
-        e.target.value = "";
+        setTag_name([...tag_name, e.target.value]);
       }
     }
   };
@@ -237,14 +252,14 @@ const AddChalet = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (e.target.value.length > 0) {
-        formik.setFieldValue("days", [...formik.values.days, e.target.value]);
+        setDays([...days, e.target.value]);
       }
       e.target.value = "";
     }
   };
   const removeDay = (removedDay) => {
     const newDays = formik.values.days.filter((day) => day !== removedDay);
-    formik.setFieldValue("days", newDays);
+    setDays(newDays);
   };
 
   useEffect(() => {
@@ -779,14 +794,14 @@ const AddChalet = () => {
             </div>
           </Col>
         </Row>
-        <Row className="d-flex flex-row-reverse justify-content-start align-items-center p-3 pt-0 pb-0">
+        {/* <Row className="d-flex flex-row-reverse justify-content-start align-items-center p-3 pt-0 pb-0">
           <Col lg={6}>
             <div className="d-flex flex-column align-items-end mb-3">
               <label htmlFor="tag_name" className="form-label tag-name">
                 {t("addChalet.columns.tag_name")}
               </label>
               <div className="form-input tag-container d-flex flex-wrap flex-row-reverse justify-content-start">
-                {formik?.values?.tag_name?.map((tag, index) => {
+                {tag_name?.map((tag, index) => {
                   return (
                     <div key={index} className="tag">
                       {tag} <span onClick={() => removeTag(tag)}>x</span>
@@ -832,7 +847,7 @@ const AddChalet = () => {
               ) : null}
             </div>
           </Col>
-        </Row>
+        </Row> */}
         <Row className="d-flex justify-content-start align-items-center p-3 pt-0">
           <Col lg={12}>
             <div className="form-group-container d-flex flex-row-reverse justify-content-lg-start justify-content-center gap-3">
