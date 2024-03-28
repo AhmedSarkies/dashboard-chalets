@@ -1,52 +1,52 @@
 import React from "react";
-import { Col, Container, Row } from "reactstrap";
-import { useTranslation } from "react-i18next";
-import { HiUsers } from "react-icons/hi2";
-import { SiIobroker } from "react-icons/si";
-import { MdBookOnline, MdOutlineChalet } from "react-icons/md";
-import { Card, Chalets, SubAdmins } from "../";
+import { Col, Row } from "reactstrap";
+// import { useTranslation } from "react-i18next";
+// import { HiUsers } from "react-icons/hi2";
+// import { SiIobroker } from "react-icons/si";
+// import { MdBookOnline, MdOutlineChalet } from "react-icons/md";
+import { Brokers, Chalets, SubAdmins } from "../";
 // import { UserData } from "../../data";
 
 const Dashboard = () => {
-  const { t } = useTranslation();
-  const cardItems = [
-    {
-      id: 1,
-      title: t("dashboard.users"),
-      icon: <HiUsers />,
-      path: "users",
-      disabled: false,
-      count: 10,
-      color: "linear-gradient(45deg, rgb(249, 177, 21), rgb(246, 150, 11))",
-    },
-    {
-      id: 2,
-      title: t("dashboard.chalets"),
-      icon: <MdOutlineChalet />,
-      path: "chalets",
-      disabled: false,
-      count: 40,
-      color: "linear-gradient(45deg, rgb(51, 153, 255), rgb(41, 130, 204))",
-    },
-    {
-      id: 3,
-      title: t("dashboard.brokers"),
-      icon: <SiIobroker />,
-      path: "brokers",
-      disabled: false,
-      count: 20,
-      color: "linear-gradient(45deg, rgb(50, 31, 219), rgb(31, 20, 152))",
-    },
-    {
-      id: 4,
-      title: t("dashboard.bookChalets"),
-      icon: <MdBookOnline />,
-      path: "book-chalets",
-      disabled: false,
-      count: 30,
-      color: "linear-gradient(45deg, rgb(203, 93, 255), rgb(128, 12, 184))",
-    },
-  ];
+  // const { t } = useTranslation();
+  // const cardItems = [
+  //   {
+  //     id: 1,
+  //     title: t("dashboard.users"),
+  //     icon: <HiUsers />,
+  //     path: "users",
+  //     disabled: false,
+  //     count: 10,
+  //     color: "linear-gradient(45deg, rgb(249, 177, 21), rgb(246, 150, 11))",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: t("dashboard.chalets"),
+  //     icon: <MdOutlineChalet />,
+  //     path: "chalets",
+  //     disabled: false,
+  //     count: 40,
+  //     color: "linear-gradient(45deg, rgb(51, 153, 255), rgb(41, 130, 204))",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: t("dashboard.brokers"),
+  //     icon: <SiIobroker />,
+  //     path: "brokers",
+  //     disabled: false,
+  //     count: 20,
+  //     color: "linear-gradient(45deg, rgb(50, 31, 219), rgb(31, 20, 152))",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: t("dashboard.bookChalets"),
+  //     icon: <MdBookOnline />,
+  //     path: "book-chalets",
+  //     disabled: false,
+  //     count: 30,
+  //     color: "linear-gradient(45deg, rgb(203, 93, 255), rgb(128, 12, 184))",
+  //   },
+  // ];
   // // eslint-disable-next-line no-unused-vars
   // const [userData, setUserData] = useState({
   //   labels: UserData.map((item) => item.year),
@@ -160,7 +160,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="dashboard-cards mb-3 mt-5 bg-white p-4">
+      {/* <div className="dashboard-cards mb-3 mt-5 bg-white p-4">
         <Container style={{ minWidth: "100%" }}>
           <Row
             style={{ maxWidth: "100vw" }}
@@ -173,7 +173,7 @@ const Dashboard = () => {
             ))}
           </Row>
         </Container>
-      </div>
+      </div> */}
       {/*<div className="dashboard-charts mb-3 p-4">
         <Row>
           <Col xl="12" className="chart-containerY">
@@ -196,9 +196,14 @@ const Dashboard = () => {
       </div>*/}
       <div className="dashboard-users mb-5 p-4">
         <Row>
-          <Col xl="12">{/* <SubAdmins dashboard={true} /> */}</Col>
+          <Col xl="12">
+            <SubAdmins dashboard={true} />
+          </Col>
           <Col xl="12">
             <Chalets dashboard={true} />
+          </Col>
+          <Col xl="12">
+            <Brokers dashboard={true} />
           </Col>
         </Row>
       </div>

@@ -5,7 +5,7 @@ import { TiDelete } from "react-icons/ti";
 import anonymous from "../../assets/images/anonymous.png";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
-import { useSchema } from "../../hooks";
+// import { useSchema } from "../../hooks";
 import {
   addChaletApi,
   getChaletByIdApi,
@@ -13,6 +13,7 @@ import {
 } from "../../store/slices/chaletSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { addBrokerChaletApi } from "../../store/slices/brokerSlice";
 
 const initialValues = {
   title: "",
@@ -40,7 +41,8 @@ const initialValues = {
   Furnishing: "",
   Bathroom: "",
   tag_name: [],
-  days: [],
+  from_day: "",
+  To_day: "",
 };
 
 const AddChalet = () => {
@@ -51,7 +53,7 @@ const AddChalet = () => {
   const navigate = useNavigate();
   const id = useParams().id;
   const registrationCode = useParams().registrationCode;
-  const { validationSchema } = useSchema();
+  // const { validationSchema } = useSchema();
   const { loading } = useSelector((state) => state.chalet);
   const [toggle, setToggle] = useState({
     add: false,
@@ -81,65 +83,110 @@ const AddChalet = () => {
   // Formik
   const formik = useFormik({
     initialValues,
-    validationSchema: id
-      ? validationSchema.updateChalet
-      : validationSchema.chalets,
+    // validationSchema: id
+    //   ? validationSchema.updateChalet
+    //   : validationSchema.chalets,
     onSubmit: (values) => {
       if (id) {
         dispatch(
           updateChaletApi({
-            ...values,
             id,
-            image_array: values.image_array,
+            title: values.title,
+            price: values.price,
+            description: values.description,
+            name_OwnerChalet: values.name_OwnerChalet,
+            phone_OwnerChalet: values.phone_OwnerChalet,
+            email_OwnerChalet: values.email_OwnerChalet,
+            whatsapp_OwnerChalet: values.whatsapp_OwnerChalet,
+            name_area: values.name_area,
+            sub_description_area: values.sub_description_area,
+            Property_type: values.Property_type,
+            Display_type: values.Display_type,
+            space: values.space,
+            number_rooms: values.number_rooms,
+            Furnishing: values.Furnishing,
+            Bathroom: values.Bathroom,
+            from_day: [values.from_day],
+            To_day: [values.To_day],
+            image_array: toggle?.images?.map((image) => image.file),
             Image_OwnerChalet: values.Image_OwnerChalet.file,
             image_area: values.image_area.file,
-            tag_name: [],
-            days: [],
+            tag_name: ["tag1", "tag2", "tag3", "tag4", "tag5"],
           })
         ).then((res) => {
           if (res.meta.requestStatus === "fulfilled") {
             formik.handleReset();
             navigate("/chalets/chalets");
-            toast.success(t("chalets.updatedSuccess"));
+            toast.success(t("toast.chalets.updatedSuccess"));
           } else {
-            toast.error(t("chalets.updatedError"));
+            toast.error(t("toast.chalets.updatedError"));
           }
         });
       } else if (registrationCode) {
-        dispatch({
-          ...values,
+        dispatch(addBrokerChaletApi({
+          title: values.title,
+          price: values.price,
+          description: values.description,
+          name_OwnerChalet: values.name_OwnerChalet,
+          phone_OwnerChalet: values.phone_OwnerChalet,
+          email_OwnerChalet: values.email_OwnerChalet,
+          whatsapp_OwnerChalet: values.whatsapp_OwnerChalet,
+          name_area: values.name_area,
+          sub_description_area: values.sub_description_area,
+          Property_type: values.Property_type,
+          Display_type: values.Display_type,
+          space: values.space,
+          number_rooms: values.number_rooms,
+          Furnishing: values.Furnishing,
+          Bathroom: values.Bathroom,
+          from_day: [values.from_day],
+          To_day: [values.To_day],
           image_array: toggle?.images?.map((image) => image.file),
           Image_OwnerChalet: values.Image_OwnerChalet.file,
           image_area: values.image_area.file,
+          tag_name: ["tag1", "tag2", "tag3", "tag4", "tag5"],
           Registration_code: registrationCode,
-          tag_name: [],
-          days: [],
-        }).then((res) => {
+        })).then((res) => {
           if (res.meta.requestStatus === "fulfilled") {
             formik.handleReset();
             navigate("/chalets/chalets");
-            toast.success(t("chalets.updatedSuccess"));
+            toast.success(t("toast.chalets.updatedSuccess"));
           } else {
-            toast.error(t("chalets.updatedError"));
+            toast.error(t("toast.chalets.updatedError"));
           }
         });
       } else {
         dispatch(
           addChaletApi({
-            ...values,
+            title: values.title,
+            price: values.price,
+            description: values.description,
+            name_OwnerChalet: values.name_OwnerChalet,
+            phone_OwnerChalet: values.phone_OwnerChalet,
+            email_OwnerChalet: values.email_OwnerChalet,
+            whatsapp_OwnerChalet: values.whatsapp_OwnerChalet,
+            name_area: values.name_area,
+            sub_description_area: values.sub_description_area,
+            Property_type: values.Property_type,
+            Display_type: values.Display_type,
+            space: values.space,
+            number_rooms: values.number_rooms,
+            Furnishing: values.Furnishing,
+            Bathroom: values.Bathroom,
+            from_day: [values.from_day],
+            To_day: [values.To_day],
             image_array: toggle?.images?.map((image) => image.file),
             Image_OwnerChalet: values.Image_OwnerChalet.file,
             image_area: values.image_area.file,
-            tag_name: [],
-            days: [],
+            tag_name: ["tag1", "tag2", "tag3", "tag4", "tag5"],
           })
         ).then((res) => {
           if (res.meta.requestStatus === "fulfilled") {
             formik.handleReset();
             navigate("/chalets/chalets");
-            toast.success(t("chalets.addedSuccess"));
+            toast.success(t("toast.chalets.addedSuccess"));
           } else {
-            toast.error(t("chalets.addedError"));
+            toast.error(t("toast.chalets.addedError"));
           }
         });
       }
@@ -160,12 +207,9 @@ const AddChalet = () => {
   const handleDeleteImageOwnerChalet = () => {
     imageOwnerChaletRef.current.value = "";
     imageOwnerChaletRef.current.files = null;
-    formik.setValues({
-      ...formik.values,
-      Image_OwnerChalet: {
-        file: "",
-        preview: "",
-      },
+    formik.setFieldValue("Image_OwnerChalet", {
+      file: "",
+      preview: "",
     });
   };
 
@@ -183,12 +227,9 @@ const AddChalet = () => {
   const handleDeleteImageArea = () => {
     imageAreaRef.current.value = "";
     imageAreaRef.current.files = null;
-    formik.setValues({
-      ...formik.values,
-      image_area: {
-        file: "",
-        preview: "",
-      },
+    formik.setFieldValue("image_area", {
+      file: "",
+      preview: "",
     });
   };
 
@@ -209,6 +250,13 @@ const AddChalet = () => {
               },
             ],
           });
+          formik.setFieldValue("image_array", [
+            ...toggle.images,
+            {
+              file: file,
+              preview: reader.result,
+            },
+          ]);
         };
         reader.readAsDataURL(file);
       });
@@ -217,14 +265,13 @@ const AddChalet = () => {
 
   // Delete Image Array
   const handleDeleteImageArray = (image) => {
-    const filteredImages = toggle.images.filter((img) => img !== image);
     setToggle({
       ...toggle,
-      images: filteredImages,
+      images: toggle.images.filter((img) => img !== image),
     });
     formik.setValues({
       ...formik.values,
-      image_array: filteredImages,
+      image_array: toggle.images.filter((img) => img !== image),
     });
   };
 
@@ -267,6 +314,8 @@ const AddChalet = () => {
       dispatch(getChaletByIdApi(id)).then((res) => {
         if (res.meta.requestStatus === "fulfilled") {
           const chalet = res.payload;
+          formik.setFieldValue("Registration_code", chalet?.Registration_code);
+          formik.setFieldValue("id", chalet?.id);
           formik.setFieldValue("title", chalet.title);
           formik.setFieldValue("price", chalet.price);
           formik.setFieldValue("description", chalet.description);
@@ -790,6 +839,46 @@ const AddChalet = () => {
               />
               {formik.errors.Bathroom && formik.touched.Bathroom ? (
                 <span className="error">{formik.errors.Bathroom}</span>
+              ) : null}
+            </div>
+          </Col>
+        </Row>
+        <Row className="d-flex flex-row-reverse justify-content-start align-items-center p-3 pt-0 pb-0">
+          <Col lg={6}>
+            <div className="form-group-container d-flex flex-column align-items-end mb-3">
+              <label htmlFor="from_day" className="form-label">
+                {t("addChalet.columns.from_day")}
+              </label>
+              <input
+                type="date"
+                className="form-input"
+                id="from_day"
+                placeholder={t("addChalet.columns.from_day")}
+                name="from_day"
+                value={formik.values.from_day}
+                onChange={handleInput}
+              />
+              {formik.errors.from_day && formik.touched.from_day ? (
+                <span className="error">{formik.errors.from_day}</span>
+              ) : null}
+            </div>
+          </Col>
+          <Col lg={6}>
+            <div className="form-group-container d-flex flex-column align-items-end mb-3">
+              <label htmlFor="To_day" className="form-label">
+                {t("addChalet.columns.To_day")}
+              </label>
+              <input
+                type="date"
+                className="form-input"
+                id="To_day"
+                placeholder={t("addChalet.columns.To_day")}
+                name="To_day"
+                value={formik.values.To_day}
+                onChange={handleInput}
+              />
+              {formik.errors.To_day && formik.touched.To_day ? (
+                <span className="error">{formik.errors.To_day}</span>
               ) : null}
             </div>
           </Col>
