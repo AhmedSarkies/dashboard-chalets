@@ -200,7 +200,7 @@ const brokerSlice = createSlice({
     // Fulfilled
     builder.addCase(addBrokerChaletApi.fulfilled, (state, action) => {
       state.loading = false;
-      state.brokerChalets.push(action.payload);
+      state.brokerChalets= action.payload;
     });
     // Rejected
     builder.addCase(addBrokerChaletApi.rejected, (state, action) => {
