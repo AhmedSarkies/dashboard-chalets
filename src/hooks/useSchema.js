@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { boolean, mixed, number, object, string } from "yup";
+import { boolean, date, mixed, number, object, string } from "yup";
 
 const useSchema = () => {
   const { t } = useTranslation();
@@ -130,11 +130,8 @@ const useSchema = () => {
           return true;
         }
       }),
-      days: mixed().test("array", t("validation.days"), (value) => {
-        if (Array.isArray(value) && value.length > 0) {
-          return true;
-        }
-      }),
+      To_day: date().required(t("validation.To_day")),
+      from_day: date().required(t("validation.from_day")),
     }),
     updateChalet: object().shape({
       title: string().required(t("validation.title")),
@@ -176,11 +173,8 @@ const useSchema = () => {
           return true;
         }
       }),
-      days: mixed().test("array", t("validation.days"), (value) => {
-        if (Array.isArray(value) && value.length > 0) {
-          return true;
-        }
-      }),
+      To_day: date().required(t("validation.To_day")),
+      from_day: date().required(t("validation.from_day")),
     }),
     brokers: object().shape({
       Fullname: string().required(t("validation.Fullname")),
