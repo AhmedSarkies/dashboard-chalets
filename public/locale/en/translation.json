@@ -241,7 +241,9 @@
       "Furnishing": "Furnishing",
       "Bathroom": "Bathroom",
       "tag_name": "Tag Name",
-      "days": "Days"
+      "days": "Days",
+      "from_day": "From Day",
+      "To_day": "To Day"
     }
   },
   "editChalet": {
@@ -378,6 +380,8 @@
     "days": "Please enter days",
     "image_area": "Please enter image of the area",
     "image_array": "Please enter image array",
-    "Image_OwnerChalet": "Please enter image of the owner"
+    "Image_OwnerChalet": "Please enter image of the owner",
+    "from_day": "Please enter from day",
+    "To_day": "Please enter to day"
   }
 }
