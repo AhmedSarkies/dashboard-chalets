@@ -13,6 +13,6 @@ export { default as Settings } from "./Settings/Settings";
 export { default as Slider } from "./Slider/Slider";
 export { default as TermsAndConditions } from "./TermsAndConditions/TermsAndConditions";
 export { default as Chalets } from "./Chalets/Chalets";
-export { default as AddChalet } from "./AddChalet/AddChalet";
+export { default as Form } from "./Form/Form";
 export { default as Brokers } from "./Brokers/Brokers";
 export { default as BookChalets } from "./BookChalets/BookChalets";
