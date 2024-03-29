@@ -6,7 +6,6 @@ import {
   MdAdminPanelSettings,
   MdBookOnline,
   MdOutlineChalet,
-  MdOutlineMarkunread,
 } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { Header, Sidebar } from "../";
@@ -25,23 +24,6 @@ const Home = () => {
       path: "/chalets/sub-admins",
       icon: <MdAdminPanelSettings />,
     },
-    // {
-    //   title: t("linkItems.messages"),
-    //   path: "/chalets/messages",
-    //   icon: <MdOutlineMarkunread />,
-    // },
-    // {
-    //   title: t("linkItems.settingsApp"),
-    //   path: "/chalets/settings",
-    // },
-    // {
-    //   title: t("linkItems.slider"),
-    //   path: "/chalets/slider",
-    // },
-    // {
-    //   title: t("linkItems.termsAndConditions"),
-    //   path: "/chalets/terms&conditions",
-    // },
     {
       title: t("linkItems.addChalet"),
       path: "/chalets/add-chalet",
@@ -62,6 +44,23 @@ const Home = () => {
       path: "/chalets/book-chalets",
       icon: <MdBookOnline />,
     },
+    // {
+    //   title: t("linkItems.messages"),
+    //   path: "/chalets/messages",
+    //   icon: <MdOutlineMarkunread />,
+    // },
+    // {
+    //   title: t("linkItems.settingsApp"),
+    //   path: "/chalets/settings",
+    // },
+    // {
+    //   title: t("linkItems.slider"),
+    //   path: "/chalets/slider",
+    // },
+    // {
+    //   title: t("linkItems.termsAndConditions"),
+    //   path: "/chalets/terms&conditions",
+    // },
   ];
   const [menu, setMenu] = useState(false);
   const location = useLocation();
