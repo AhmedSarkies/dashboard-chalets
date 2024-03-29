@@ -76,7 +76,13 @@ const useSchema = () => {
       title: string().required(t("validation.title")),
       price: string().required(t("validation.price")),
       description: string().required(t("validation.description")),
-      image_array: mixed().required(t("validation.image_array")).notRequired(),
+      image_array: mixed()
+        .required(t("validation.image_array"))
+        .test("array", t("validation.image_array"), (value) => {
+          if (Array.isArray(value) && value.length > 0) {
+            return true;
+          }
+        }),
       Image_OwnerChalet: mixed()
         .test("fileSize", t("validation.Image_OwnerChalet"), (value) => {
           if (value.file) {
@@ -125,11 +131,11 @@ const useSchema = () => {
       number_rooms: string().required(t("validation.number_rooms")),
       Furnishing: string().required(t("validation.Furnishing")),
       Bathroom: string().required(t("validation.Bathroom")),
-      tag_name: mixed().test("array", t("validation.tag_name"), (value) => {
-        if (Array.isArray(value) && value.length > 0) {
-          return true;
-        }
-      }),
+      // tag_name: mixed().test("array", t("validation.tag_name"), (value) => {
+      //   if (Array.isArray(value) && value.length > 0) {
+      //     return true;
+      //   }
+      // }),
       To_day: date().required(t("validation.To_day")),
       from_day: date().required(t("validation.from_day")),
     }),
@@ -168,11 +174,11 @@ const useSchema = () => {
       number_rooms: string().required(t("validation.number_rooms")),
       Furnishing: string().required(t("validation.Furnishing")),
       Bathroom: string().required(t("validation.Bathroom")),
-      tag_name: mixed().test("array", t("validation.tag_name"), (value) => {
-        if (Array.isArray(value) && value.length > 0) {
-          return true;
-        }
-      }),
+      // tag_name: mixed().test("array", t("validation.tag_name"), (value) => {
+      //   if (Array.isArray(value) && value.length > 0) {
+      //     return true;
+      //   }
+      // }),
       To_day: date().required(t("validation.To_day")),
       from_day: date().required(t("validation.from_day")),
     }),
