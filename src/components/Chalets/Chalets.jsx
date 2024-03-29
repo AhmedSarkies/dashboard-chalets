@@ -82,8 +82,8 @@ const Chalets = ({ dashboard }) => {
           if (!res.error) {
             dispatch(deleteChalet(chalets?.id));
             Swal.fire({
-              title: `${t("titleDeletedSuccess")} ${chalets?.name}`,
-              text: `${t("titleDeletedSuccess")} ${chalets?.name} ${t(
+              title: `${t("titleDeletedSuccess")} ${chalets?.title}`,
+              text: `${t("titleDeletedSuccess")} ${chalets?.title} ${t(
                 "textDeletedSuccess"
               )}`,
               icon: "success",
