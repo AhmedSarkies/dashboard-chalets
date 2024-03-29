@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import { MdMenu, MdOutlineLogout } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import Http from "../../Http";
+import { useTranslation } from "react-i18next";
 
 const Header = ({ menu, toggleMenu, linkItems }) => {
   const location = useLocation();
+  const { t } = useTranslation();
   const lng = Cookies.get("i18next") || "ar";
   const [loading, setLoading] = useState(false);
 
@@ -29,6 +31,8 @@ const Header = ({ menu, toggleMenu, linkItems }) => {
       }
     } catch (error) {
       setLoading(false);
+      Cookies.remove("_auth");
+      window.location.href = "/chalets/login";
     }
   };
 
@@ -60,12 +64,14 @@ const Header = ({ menu, toggleMenu, linkItems }) => {
         </div>
         <div className="dashboard-header-title">
           <h6 className="login-title">
-            {
-              linkItems.find(
-                (item) =>
-                  item.path.toLowerCase() === location.pathname.toLowerCase()
-              )?.title
-            }
+            {linkItems.find(
+              (item) =>
+                item.path.toLowerCase() === location.pathname.toLowerCase()
+            )?.title ||
+              `${
+                location.pathname.toLowerCase().includes("edit-chalet") &&
+                t("linkItems.editChalet")
+              }`}
           </h6>
           <button className="btn menu-btn" onClick={toggleMenu}>
             <MdMenu />
