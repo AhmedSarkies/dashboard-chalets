@@ -1,17 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import {
-  AccordionBody,
-  AccordionHeader,
-  AccordionItem,
-  UncontrolledAccordion,
-} from "reactstrap";
-import { IoMdSettings } from "react-icons/io";
 
 const Sidebar = ({ menu, linkItems, logo }) => {
-  const { t } = useTranslation();
-
   return (
     <div className={`sidebar${menu ? " active" : ""}`}>
       <div className="sidebar-header d-flex justify-content-center align-items-center pt-4 pb-4">
