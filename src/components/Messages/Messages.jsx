@@ -350,7 +350,7 @@ const Messages = () => {
         </table>
       </div>
       {/* Pagination */}
-      {searchResults.length > 0 && error === null && loading === false && (
+      {searchResults?.length > 0 && error === null && loading === false && (
         <PaginationUI />
       )}
     </div>

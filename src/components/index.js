@@ -16,3 +16,4 @@ export { default as Chalets } from "./Chalets/Chalets";
 export { default as Form } from "./Form/Form";
 export { default as Brokers } from "./Brokers/Brokers";
 export { default as BookChalets } from "./BookChalets/BookChalets";
+export { default as BrokerChaletForm } from "./BrokerChaletForm/BrokerChaletForm";

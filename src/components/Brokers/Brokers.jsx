@@ -4,21 +4,22 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Col, Modal, ModalBody, ModalHeader, Row, Spinner } from "reactstrap";
 
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdDeleteOutline } from "react-icons/md";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import { IoMdClose } from "react-icons/io";
 import {
-  // deleteBrokerApi,
-  getBrokers,
+  addBrokerApi,
+  deleteBrokerApi,
   getBrokersApi,
-  // addBrokerApi,
-  // updateBrokerApi,
-  // deleteBroker,
+  updateBrokerApi,
 } from "../../store/slices/brokerSlice";
 import { useFormik } from "formik";
 import { useFiltration, useSchema } from "../../hooks";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import { FaPen } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const initialValues = {
   Fullname: "",
@@ -29,6 +30,7 @@ const Brokers = ({ dashboard }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { validationSchema } = useSchema();
+  const location = useLocation();
   const { brokers, loading, error } = useSelector((state) => state.broker);
   const [toggle, setToggle] = useState({
     add: false,
@@ -46,6 +48,7 @@ const Brokers = ({ dashboard }) => {
       name: true,
       phone: true,
       Registration_code: true,
+      action: true,
     },
   });
 
@@ -54,9 +57,75 @@ const Brokers = ({ dashboard }) => {
     initialValues,
     validationSchema: validationSchema.brokers,
     onSubmit: (values) => {
-      console.log(values);
+      // Add Broker
+      if (!values.id) {
+        dispatch(addBrokerApi(values)).then((res) => {
+          if (!res.error) {
+            dispatch(getBrokersApi());
+            formik.handleReset();
+            setToggle({
+              ...toggle,
+              add: !toggle.add,
+            });
+            toast.success(t("toast.brokers.addedSuccess"));
+          } else {
+            toast.error(t("toast.brokers.addedError"));
+            dispatch(getBrokersApi());
+          }
+        });
+      } else {
+        // Update Broker
+        dispatch(updateBrokerApi(values)).then((res) => {
+          if (!res.error) {
+            dispatch(getBrokersApi());
+            formik.handleReset();
+            setToggle({
+              ...toggle,
+              add: !toggle.add,
+            });
+            toast.success(t("toast.brokers.updatedSuccess"));
+          } else {
+            toast.error(t("toast.brokers.updatedError"));
+            dispatch(getBrokersApi());
+          }
+        });
+      }
     },
   });
+
+  // Delete Scholar
+  const handleDelete = (broker) => {
+    Swal.fire({
+      title: t("titleDeleteAlert") + broker?.Fullname + "?",
+      text: t("textDeleteAlert"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#0d1d34",
+      confirmButtonText: t("confirmButtonText"),
+      cancelButtonText: t("cancel"),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteBrokerApi(broker?.id)).then((res) => {
+          if (!res.error) {
+            dispatch(getBrokersApi());
+            Swal.fire({
+              title: `${t("titleDeletedSuccess")} ${broker?.Fullname}`,
+              text: `${t("titleDeletedSuccess")} ${broker?.Fullname} ${t(
+                "textDeletedSuccess"
+              )}`,
+              icon: "success",
+              confirmButtonColor: "#0d1d34",
+              confirmButtonText: t("doneDeletedSuccess"),
+            }).then(() => toast.success(t("toast.brokers.deletedSuccess")));
+          } else {
+            toast.error(t("toast.brokers.deletedError"));
+            dispatch(getBrokersApi());
+          }
+        });
+      }
+    });
+  };
 
   // handle Input Using Formik
   const handleInput = (e) => {
@@ -73,6 +142,7 @@ const Brokers = ({ dashboard }) => {
       name: "Registration_code",
       label: t("brokers.columns.Registration_code"),
     },
+    { id: 4, name: "action", label: t("action") },
   ];
   const {
     PaginationUI,
@@ -89,15 +159,11 @@ const Brokers = ({ dashboard }) => {
   // get data from api
   useEffect(() => {
     try {
-      dispatch(getBrokersApi()).then((res) => {
-        if (!res.error) {
-          dispatch(getBrokers(res.payload));
-        }
-      });
+      dispatch(getBrokersApi());
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, [dispatch, location.pathname]);
 
   return (
     <div className="scholar-container mt-4 m-3">
@@ -219,13 +285,16 @@ const Brokers = ({ dashboard }) => {
                   ) : null}
                 </th>
               )}
+              {toggle.toggleColumns.action && (
+                <th className="table-th">{t("action")}</th>
+              )}
             </tr>
           </thead>
           {/* Error */}
           {error !== null && loading === false && (
             <tbody>
               <tr className="no-data-container">
-                <td className="table-td" colSpan="3">
+                <td className="table-td" colSpan="4">
                   <p className="no-data mb-0">
                     {error === "Network Error"
                       ? t("networkError")
@@ -243,7 +312,7 @@ const Brokers = ({ dashboard }) => {
           {loading && (
             <tbody>
               <tr className="no-data-container">
-                <td className="table-td" colSpan="3">
+                <td className="table-td" colSpan="4">
                   <div className="no-data mb-0">
                     <Spinner
                       style={{
@@ -260,10 +329,10 @@ const Brokers = ({ dashboard }) => {
             </tbody>
           )}
           {/* No Data */}
-          {searchResults.length === 0 && error === null && !loading && (
+          {searchResults?.length === 0 && error === null && !loading && (
             <tbody>
               <tr className="no-data-container">
-                <td className="table-td" colSpan="3">
+                <td className="table-td" colSpan="4">
                   <p className="no-data mb-0">{t("noData")}</p>
                 </td>
               </tr>
@@ -275,14 +344,14 @@ const Brokers = ({ dashboard }) => {
           ) && (
             <tbody>
               <tr className="no-data-container">
-                <td className="table-td" colSpan="3">
+                <td className="table-td" colSpan="4">
                   <p className="no-data no-columns mb-0">{t("noColumns")}</p>
                 </td>
               </tr>
             </tbody>
           )}
           {/* Data */}
-          {searchResults.length > 0 && error === null && loading === false && (
+          {searchResults?.length > 0 && error === null && loading === false && (
             <tbody>
               {searchResults?.map((result) => (
                 <tr key={result?.id + new Date().getDate()}>
@@ -305,6 +374,30 @@ const Brokers = ({ dashboard }) => {
                   )}
                   {toggle.toggleColumns.Registration_code && (
                     <td className="table-td">{result?.Registration_code}</td>
+                  )}
+                  {toggle.toggleColumns.action && (
+                    <td className="table-td">
+                      <span className="table-btn-container">
+                        <FaPen
+                          className="edit-btn"
+                          onClick={() => {
+                            setToggle({
+                              ...toggle,
+                              add: !toggle.add,
+                            });
+                            formik.setValues({
+                              id: result?.id,
+                              Fullname: result?.Fullname,
+                              phone_number: result?.phone_number,
+                            });
+                          }}
+                        />
+                        <MdDeleteOutline
+                          className="delete-btn"
+                          onClick={() => handleDelete(result)}
+                        />
+                      </span>
+                    </td>
                   )}
                 </tr>
               ))}
@@ -336,7 +429,7 @@ const Brokers = ({ dashboard }) => {
             });
           }}
         >
-          {t("brokers.addTitle")}
+          {formik.values.id ? t("brokers.editTitle") : t("brokers.addTitle")}
           <IoMdClose
             onClick={() => {
               formik.handleReset();
@@ -427,7 +520,7 @@ const Brokers = ({ dashboard }) => {
         </ModalBody>
       </Modal>
       {/* Pagination */}
-      {searchResults.length > 0 && error === null && loading === false && (
+      {searchResults?.length > 0 && error === null && loading === false && (
         <PaginationUI />
       )}
     </div>

@@ -9,16 +9,18 @@ import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import { FaPen } from "react-icons/fa";
 import {
   deleteChaletApi,
-  getChalets,
   getChaletsApi,
-  deleteChalet,
 } from "../../store/slices/chaletSlice";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useFiltration } from "../../hooks";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { getBrokerChaletsApi } from "../../store/slices/brokerSlice";
+import {
+  deleteBrokerChaletApi,
+  getBrokerApi,
+  getBrokerChaletsApi,
+} from "../../store/slices/brokerSlice";
 
 const Chalets = ({ dashboard }) => {
   const { t } = useTranslation();
@@ -26,7 +28,7 @@ const Chalets = ({ dashboard }) => {
   const location = useLocation();
   const id = useParams().id;
   const { chalets, loading, error } = useSelector((state) => state.chalet);
-  const { brokerChalets } = useSelector((state) => state.broker);
+  const { brokerChalets, broker } = useSelector((state) => state.broker);
   const [toggle, setToggle] = useState({
     add: false,
     edit: false,
@@ -78,22 +80,45 @@ const Chalets = ({ dashboard }) => {
       cancelButtonText: t("cancel"),
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteChaletApi(chalets?.id)).then((res) => {
-          if (!res.error) {
-            dispatch(deleteChalet(chalets?.id));
-            Swal.fire({
-              title: `${t("titleDeletedSuccess")} ${chalets?.title}`,
-              text: `${t("titleDeletedSuccess")} ${chalets?.title} ${t(
-                "textDeletedSuccess"
-              )}`,
-              icon: "success",
-              confirmButtonColor: "#0d1d34",
-              confirmButtonText: t("doneDeletedSuccess"),
-            }).then(() => toast.success(t("toast.chalets.deletedSuccess")));
-          } else {
-            toast.error(t("toast.chalets.deletedError"));
-          }
-        });
+        // Delete Chalet if location is not broker
+        if (!id) {
+          dispatch(deleteChaletApi(chalets?.id)).then((res) => {
+            if (!res.error) {
+              dispatch(getChaletsApi());
+              Swal.fire({
+                title: `${t("titleDeletedSuccess")} ${chalets?.title}`,
+                text: `${t("titleDeletedSuccess")} ${chalets?.title} ${t(
+                  "textDeletedSuccess"
+                )}`,
+                icon: "success",
+                confirmButtonColor: "#0d1d34",
+                confirmButtonText: t("doneDeletedSuccess"),
+              }).then(() => toast.success(t("toast.chalets.deletedSuccess")));
+            } else {
+              dispatch(getChaletsApi());
+              toast.error(t("toast.chalets.deletedError"));
+            }
+          });
+        } else {
+          // Delete Broker Chalet
+          dispatch(deleteBrokerChaletApi(chalets?.id)).then((res) => {
+            if (!res.error) {
+              dispatch(getBrokerChaletsApi(id));
+              Swal.fire({
+                title: `${t("titleDeletedSuccess")} ${chalets?.title}`,
+                text: `${t("titleDeletedSuccess")} ${chalets?.title} ${t(
+                  "textDeletedSuccess"
+                )}`,
+                icon: "success",
+                confirmButtonColor: "#0d1d34",
+                confirmButtonText: t("doneDeletedSuccess"),
+              }).then(() => toast.success(t("toast.chalets.deletedSuccess")));
+            } else {
+              dispatch(getBrokerChaletsApi(id));
+              toast.error(t("toast.chalets.deletedError"));
+            }
+          });
+        }
       }
     });
   };
@@ -140,7 +165,7 @@ const Chalets = ({ dashboard }) => {
     handleToggleColumns,
     searchResults,
   } = useFiltration({
-    rowData: chalets,
+    rowData: id ? brokerChalets : chalets,
     toggle,
     setToggle,
   });
@@ -148,12 +173,11 @@ const Chalets = ({ dashboard }) => {
   // get data from api
   useEffect(() => {
     try {
-      dispatch(getChaletsApi()).then((res) => {
-        if (!res.error) {
-          dispatch(getChalets(res.payload));
-        }
-      });
-      dispatch(getBrokerChaletsApi(id));
+      dispatch(getChaletsApi());
+      if (id) {
+        dispatch(getBrokerChaletsApi());
+        dispatch(getBrokerApi(id));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -166,7 +190,7 @@ const Chalets = ({ dashboard }) => {
           className="add-btn"
           to={
             id
-              ? `/chalets/broker/add-broker-chalet/${brokerChalets.Registration_code}`
+              ? `/chalets/broker/add-broker-chalet/${broker.Registration_code}`
               : "/chalets/add-chalet"
           }
         >
@@ -441,11 +465,9 @@ const Chalets = ({ dashboard }) => {
                   ) : null}
                 </th>
               )}
-              {id
-                ? null
-                : toggle.toggleColumns.control && (
-                    <th className="table-th">{t("action")}</th>
-                  )}
+              {toggle.toggleColumns.control && (
+                <th className="table-th">{t("action")}</th>
+              )}
             </tr>
           </thead>
           {/* Error */}
@@ -487,7 +509,7 @@ const Chalets = ({ dashboard }) => {
             </tbody>
           )}
           {/* No Data */}
-          {searchResults.length === 0 && error === null && !loading && (
+          {searchResults?.length === 0 && error === null && !loading && (
             <tbody>
               <tr className="no-data-container">
                 <td className="table-td" colSpan={id ? 15 : 16}>
@@ -508,94 +530,115 @@ const Chalets = ({ dashboard }) => {
               </tr>
             </tbody>
           )}
-          {/* Data */}
-          {id && error === null && loading === false && (
-            <tbody>
-              <tr key={brokerChalets?.id + new Date().getDate()}>
-                {toggle.toggleColumns.image_array && (
-                  <td className="table-td">
-                    <img
-                      src={brokerChalets?.image_area?.split(",")[0]}
-                      alt={brokerChalets?.title}
-                      className="table-img"
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                      }}
-                    />
-                  </td>
-                )}
-                {toggle.toggleColumns.title && (
-                  <td className="table-td name">{brokerChalets?.title}</td>
-                )}
-                {toggle.toggleColumns.price && (
-                  <td className="table-td">{brokerChalets?.price}</td>
-                )}
-                {toggle.toggleColumns.name_area && (
-                  <td className="table-td">{brokerChalets?.name_area}</td>
-                )}
-                {toggle.toggleColumns.Property_type && (
-                  <td className="table-td">{brokerChalets?.Property_type}</td>
-                )}
-                {toggle.toggleColumns.Display_type && (
-                  <td className="table-td">{brokerChalets?.Display_type}</td>
-                )}
-                {toggle.toggleColumns.space && (
-                  <td className="table-td">{brokerChalets?.space}</td>
-                )}
-                {toggle.toggleColumns.number_rooms && (
-                  <td className="table-td">{brokerChalets?.number_rooms}</td>
-                )}
-                {toggle.toggleColumns.Furnishing && (
-                  <td className="table-td">{brokerChalets?.Furnishing}</td>
-                )}
-                {toggle.toggleColumns.Bathroom && (
-                  <td className="table-td">{brokerChalets?.Bathroom}</td>
-                )}
-                {toggle.toggleColumns.Registration_code && (
-                  <td className="table-td">
-                    {brokerChalets?.Registration_code}
-                  </td>
-                )}
-                {toggle.toggleColumns.name_OwnerChalet && (
-                  <td className="table-td">
-                    {brokerChalets?.name_OwnerChalet}
-                  </td>
-                )}
-                {toggle.toggleColumns.phone_OwnerChalet && (
-                  <td className="table-td">
-                    <a
-                      href={`tel:${brokerChalets?.phone_OwnerChalet}`}
-                      className="phone"
-                    >
-                      {brokerChalets?.phone_OwnerChalet}
-                    </a>
-                  </td>
-                )}
-                {toggle.toggleColumns.email_OwnerChalet && (
-                  <td className="table-td">
-                    <a
-                      href={`mailto:${brokerChalets?.email_OwnerChalet}`}
-                      className="email"
-                    >
-                      {brokerChalets?.email_OwnerChalet}
-                    </a>
-                  </td>
-                )}
-                {toggle.toggleColumns.whatsapp_OwnerChalet && (
-                  <td className="table-td">
-                    <a
-                      href={`mailto:${brokerChalets?.whatsapp_OwnerChalet}`}
-                      className="email"
-                    >
-                      {brokerChalets?.whatsapp_OwnerChalet}
-                    </a>
-                  </td>
-                )}
-              </tr>
-            </tbody>
-          )}
-          {searchResults.length > 0 &&
+          {
+            // Show Broker Chalets if no id === "The selected id is invalid."
+            id &&
+              error === null &&
+              loading === false &&
+              searchResults?.length > 0 && (
+                <tbody>
+                  {searchResults?.map((result) => (
+                    <tr key={result?.id + new Date().getDate()}>
+                      {toggle.toggleColumns.image_array && (
+                        <td className="table-td">
+                          <img
+                            src={result?.image_area?.split(",")[0]}
+                            alt={result?.title}
+                            className="table-img"
+                            style={{
+                              width: "50px",
+                              height: "50px",
+                            }}
+                          />
+                        </td>
+                      )}
+                      {toggle.toggleColumns.title && (
+                        <td className="table-td name">{result?.title}</td>
+                      )}
+                      {toggle.toggleColumns.price && (
+                        <td className="table-td">{result?.price}</td>
+                      )}
+                      {toggle.toggleColumns.name_area && (
+                        <td className="table-td">{result?.name_area}</td>
+                      )}
+                      {toggle.toggleColumns.Property_type && (
+                        <td className="table-td">{result?.Property_type}</td>
+                      )}
+                      {toggle.toggleColumns.Display_type && (
+                        <td className="table-td">{result?.Display_type}</td>
+                      )}
+                      {toggle.toggleColumns.space && (
+                        <td className="table-td">{result?.space}</td>
+                      )}
+                      {toggle.toggleColumns.number_rooms && (
+                        <td className="table-td">{result?.number_rooms}</td>
+                      )}
+                      {toggle.toggleColumns.Furnishing && (
+                        <td className="table-td">{result?.Furnishing}</td>
+                      )}
+                      {toggle.toggleColumns.Bathroom && (
+                        <td className="table-td">{result?.Bathroom}</td>
+                      )}
+                      {toggle.toggleColumns.Registration_code && (
+                        <td className="table-td">
+                          {result?.Registration_code}
+                        </td>
+                      )}
+                      {toggle.toggleColumns.name_OwnerChalet && (
+                        <td className="table-td">{result?.name_OwnerChalet}</td>
+                      )}
+                      {toggle.toggleColumns.phone_OwnerChalet && (
+                        <td className="table-td">
+                          <a
+                            href={`tel:${result?.phone_OwnerChalet}`}
+                            className="phone"
+                          >
+                            {result?.phone_OwnerChalet}
+                          </a>
+                        </td>
+                      )}
+                      {toggle.toggleColumns.email_OwnerChalet && (
+                        <td className="table-td">
+                          <a
+                            href={`mailto:${result?.email_OwnerChalet}`}
+                            className="email"
+                          >
+                            {result?.email_OwnerChalet}
+                          </a>
+                        </td>
+                      )}
+                      {toggle.toggleColumns.whatsapp_OwnerChalet && (
+                        <td className="table-td">
+                          <a
+                            href={`mailto:${result?.whatsapp_OwnerChalet}`}
+                            className="email"
+                          >
+                            {result?.whatsapp_OwnerChalet}
+                          </a>
+                        </td>
+                      )}
+                      {toggle.toggleColumns.control && (
+                        <td className="table-td">
+                          <span className="table-btn-container">
+                            <Link
+                              to={`/chalets/broker/edit-broker-chalet/${result?.id}`}
+                              className="edit-btn"
+                            >
+                              <FaPen className="edit-btn" />
+                            </Link>
+                            <MdDeleteOutline
+                              className="delete-btn"
+                              onClick={() => handleDelete(result)}
+                            />
+                          </span>
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              )
+          }
+          {searchResults?.length > 0 &&
             error === null &&
             loading === false &&
             id === undefined && (
@@ -701,7 +744,7 @@ const Chalets = ({ dashboard }) => {
         </table>
       </div>
       {/* Pagination */}
-      {searchResults.length > 0 && error === null && loading === false && (
+      {searchResults?.length > 0 && error === null && loading === false && (
         <PaginationUI />
       )}
     </div>

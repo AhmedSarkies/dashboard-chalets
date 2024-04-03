@@ -6,14 +6,13 @@ import anonymous from "../../assets/images/anonymous.png";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import { useSchema } from "../../hooks";
-import {
-  addChaletApi,
-  getChaletByIdApi,
-  updateChaletApi,
-} from "../../store/slices/chaletSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { addBrokerChaletApi } from "../../store/slices/brokerSlice";
+import {
+  addBrokerChaletApi,
+  getBrokerChaletByIdApi,
+  updateBrokerChaletApi,
+} from "../../store/slices/brokerSlice";
 
 const initialValues = {
   title: "",
@@ -45,7 +44,7 @@ const initialValues = {
   To_day: "",
 };
 
-const Form = () => {
+const BrokerChaletForm = () => {
   const { t } = useTranslation();
   const imageOwnerChaletRef = useRef();
   const imageAreaRef = useRef();
@@ -54,7 +53,6 @@ const Form = () => {
   const id = useParams().id;
   const registrationCode = useParams().registrationCode;
   const { validationSchema } = useSchema();
-  const { loading } = useSelector((state) => state.chalet);
   const { loading: loadingChalet } = useSelector((state) => state.broker);
   const [toggle, setToggle] = useState({
     add: false,
@@ -136,20 +134,20 @@ const Form = () => {
     };
     if (id) {
       dispatch(
-        updateChaletApi({
+        updateBrokerChaletApi({
           ...formData,
           id,
         })
       ).then((res) => {
         if (res.meta.requestStatus === "fulfilled") {
           formik.handleReset();
-          navigate("/chalets/chalets");
+          navigate(-1);
           toast.success(t("toast.chalets.updatedSuccess"));
         } else {
           toast.error(t("toast.chalets.updatedError"));
         }
       });
-    } else if (registrationCode) {
+    } else {
       dispatch(
         addBrokerChaletApi({
           ...formData,
@@ -158,17 +156,7 @@ const Form = () => {
       ).then((res) => {
         if (res.meta.requestStatus === "fulfilled") {
           formik.handleReset();
-          navigate("/chalets/chalets");
-          toast.success(t("toast.chalets.addedSuccess"));
-        } else {
-          toast.error(t("toast.chalets.addedError"));
-        }
-      });
-    } else {
-      dispatch(addChaletApi(formData)).then((res) => {
-        if (res.meta.requestStatus === "fulfilled") {
-          formik.handleReset();
-          navigate("/chalets/chalets");
+          navigate(-1);
           toast.success(t("toast.chalets.addedSuccess"));
         } else {
           toast.error(t("toast.chalets.addedError"));
@@ -306,7 +294,7 @@ const Form = () => {
   useEffect(() => {
     if (id) {
       try {
-        dispatch(getChaletByIdApi(id)).then((res) => {
+        dispatch(getBrokerChaletByIdApi(id)).then((res) => {
           if (res.meta.requestStatus === "fulfilled") {
             const chalet = res.payload;
             formik.setValues({
@@ -356,7 +344,7 @@ const Form = () => {
         <h2>{id ? t("chalets.editTitle") : t("chalets.addTitle")}</h2>
       </div>
       {/* <div className="scholar"> */}
-      {loading ? (
+      {loadingChalet ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ marginBottom: "2rem" }}
@@ -896,66 +884,12 @@ const Form = () => {
               </div>
             </Col>
           </Row>
-          {/* <Row className="d-flex flex-row-reverse justify-content-start align-items-center p-3 pt-0 pb-0">
-          <Col lg={6}>
-            <div className="d-flex flex-column align-items-end mb-3">
-              <label htmlFor="tag_name" className="form-label tag-name">
-                {t("addChalet.columns.tag_name")}
-              </label>
-              <div className="form-input tag-container d-flex flex-wrap flex-row-reverse justify-content-start">
-                {tag_name?.map((tag, index) => {
-                  return (
-                    <div key={index} className="tag">
-                      {tag} <span onClick={() => removeTag(tag)}>x</span>
-                    </div>
-                  );
-                })}
-                <input
-                  onKeyDown={addTag}
-                  type="text"
-                  className="tag-input"
-                  id="tag_name"
-                  placeholder={t("addChalet.columns.tag_name")}
-                />
-              </div>
-              {formik.errors.tag_name && formik.touched.tag_name ? (
-                <span className="error">{formik.errors.tag_name}</span>
-              ) : null}
-            </div>
-          </Col>
-          <Col lg={6}>
-            <div className="d-flex flex-column align-items-end mb-3">
-              <label htmlFor="days" className="form-label tag-name">
-                {t("addChalet.columns.days")}
-              </label>
-              <div className="form-input tag-container d-flex flex-wrap flex-row-reverse justify-content-start">
-                {formik?.values?.days?.map((day, index) => {
-                  return (
-                    <div key={index} className="tag">
-                      {day} <span onClick={() => removeDay(day)}>x</span>
-                    </div>
-                  );
-                })}
-                <input
-                  onKeyDown={addDays}
-                  type="text"
-                  className="tag-input"
-                  id="days"
-                  placeholder={t("addChalet.columns.days")}
-                />
-              </div>
-              {formik.errors.days && formik.touched.days ? (
-                <span className="error">{formik.errors.days}</span>
-              ) : null}
-            </div>
-          </Col>
-        </Row> */}
           <Row className="d-flex justify-content-start align-items-center p-3 pt-0">
             <Col lg={12}>
               <div className="form-group-container d-flex flex-row-reverse justify-content-lg-start justify-content-center gap-3">
                 <button type="submit" className="add-btn">
                   {/* loading */}
-                  {loading || loadingChalet ? (
+                  {loadingChalet ? (
                     <span
                       className="spinner-border spinner-border-sm"
                       role="status"
@@ -990,4 +924,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default BrokerChaletForm;

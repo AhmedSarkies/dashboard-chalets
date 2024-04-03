@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Modal, ModalBody, ModalHeader, Row, Spinner } from "reactstrap";
-import { MdAdd,  MdEdit } from "react-icons/md";
+import { MdAdd, MdEdit } from "react-icons/md";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import { IoMdClose } from "react-icons/io";
 import {
@@ -330,7 +330,7 @@ const SubAdmins = ({ dashboard }) => {
             </tbody>
           )}
           {/* No Data */}
-          {searchResults.length === 0 && error === null && !loading && (
+          {searchResults?.length === 0 && error === null && !loading && (
             <tbody>
               <tr className="no-data-container">
                 <td className="table-td" colSpan="4">
@@ -352,7 +352,7 @@ const SubAdmins = ({ dashboard }) => {
             </tbody>
           )}
           {/* Data */}
-          {searchResults.length > 0 && error === null && loading === false && (
+          {searchResults?.length > 0 && error === null && loading === false && (
             <tbody>
               {searchResults?.map((result) => (
                 <tr key={result?.id + new Date().getDate()}>
@@ -409,7 +409,7 @@ const SubAdmins = ({ dashboard }) => {
         </table>
       </div>
       {/* Pagination */}
-      {searchResults.length > 0 && error === null && loading === false && (
+      {searchResults?.length > 0 && error === null && loading === false && (
         <PaginationUI />
       )}
       {/* Add Sub Admin */}

@@ -67,11 +67,20 @@ const Header = ({ menu, toggleMenu, linkItems }) => {
             {linkItems.find(
               (item) =>
                 item.path.toLowerCase() === location.pathname.toLowerCase()
-            )?.title ||
-              `${
-                location.pathname.toLowerCase().includes("edit-chalet") &&
-                t("linkItems.editChalet")
-              }`}
+            )?.title
+              ? linkItems.find(
+                  (item) =>
+                    item.path.toLowerCase() === location.pathname.toLowerCase()
+                )?.title
+              : location.pathname.includes("/chalets/chalets-brokers/")
+              ? t("brokersChalets")
+              : location.pathname.includes("/chalets/broker/add-broker-chalet/")
+              ? t("addBrokerChalet")
+              : location.pathname.includes(
+                  "/chalets/broker/edit-broker-chalet/"
+                )
+              ? t("editBrokerChalet")
+              : ""}
           </h6>
           <button className="btn menu-btn" onClick={toggleMenu}>
             <MdMenu />
