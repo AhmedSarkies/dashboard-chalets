@@ -12,6 +12,7 @@ import {
   Form,
   Brokers,
   BookChalets,
+  BrokerChaletForm,
 } from "../components";
 
 const RoutesHome = () => (
@@ -30,7 +31,11 @@ const RoutesHome = () => (
       <Route path="edit-chalet/:id" element={<Form />} />
       <Route
         path="broker/add-broker-chalet/:registrationCode"
-        element={<Form />}
+        element={<BrokerChaletForm />}
+      />
+      <Route
+        path="broker/edit-broker-chalet/:id"
+        element={<BrokerChaletForm />}
       />
       <Route path="brokers" element={<Brokers />} />
       <Route path="chalets-brokers/:id" element={<Chalets />} />
